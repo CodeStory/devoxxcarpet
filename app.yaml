@@ -2,8 +2,6 @@ version: 1
 runtime: custom
 vm: true
 api_version: 1
-
-# Java?
 threadsafe: yes
 
 manual_scaling:
@@ -16,17 +14,14 @@ handlers:
 #  static_files: app/\1
 #  upload: app/(.*\.(html|css|js))
 
-# Java
-- url: /(.*\.(gif|png|jpg))$
+- url: /(.*\.(html|css|js|gif|png|jpg))$
   static_files: app/\1
-  upload: app/.*\.(gif|png|jpg)$
+  upload: app/.*\.(html|css|js|gif|png|jpg)$
 
-# Node
-#- url: /
-#  static_files: app/index.html
-#  upload: app/index.html
+- url: /
+  static_files: app/index.html
+  upload: app/index.html
 
-# Java
 - url: .*
   script: dynamic
 
