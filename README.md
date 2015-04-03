@@ -50,3 +50,5 @@ TODO:
 
  + Make docker-machine work
  + Dockerfile switching
+ + gitignore
+ + appengine adapter

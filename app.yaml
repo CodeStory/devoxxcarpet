@@ -3,19 +3,34 @@ runtime: custom
 vm: true
 api_version: 1
 
+# Java?
+threadsafe: yes
+
 manual_scaling:
   instances: 1
 
 handlers:
 
-- url: /(.*\.(html|css|js))
+# Node
+#- url: /(.*\.(html|css|js))
+#  static_files: app/\1
+#  upload: app/(.*\.(html|css|js))
+
+# Java
+- url: /(.*\.(gif|png|jpg))$
   static_files: app/\1
-  upload: app/(.*\.(html|css|js))
+  upload: app/.*\.(gif|png|jpg)$
 
-- url: /
-  static_files: app/index.html
-  upload: app/index.html
+# Node
+#- url: /
+#  static_files: app/index.html
+#  upload: app/index.html
 
-- url: /.*
-  script: app.js
-  login: required
+# Java
+- url: .*
+  script: dynamic
+
+# Node
+#- url: /.*
+#  script: app.js
+#  login: required
