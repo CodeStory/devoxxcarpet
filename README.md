@@ -22,7 +22,10 @@ docker run --rm -ti -e DATASTORE=true dgageot/devoxxcarpet
 Run on GCE with docker machine:
 
 ```bash
-docker-machine create --driver google --google-project vmruntime-demo --google-zone us-central1-a carpet01
+docker-machine create --driver google --google-project vmruntime-demo --google-zone europe-west1-d --google-machine-type n1-standard-1 carpet4
+docker $(docker-machine config carpet4) ps
+docker $(docker-machine config carpet4) build -t dgageot/devoxxcarpet .
+docker $(docker-machine config carpet4) run --rm -ti -e DATASTORE=true dgageot/devoxxcarpet
 ```
 
 Run node version:
@@ -50,5 +53,4 @@ TODO:
 
  + Make docker-machine work
  + Dockerfile switching
- + gitignore
  + appengine adapter
