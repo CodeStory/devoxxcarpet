@@ -13,7 +13,7 @@ WORKDIR /home/devoxx
 # Warmup maven by building an old version that we don't change often
 #
 ADD docker/old_version.tgz /home/devoxx
-RUN mvn verify -DskipTests && rm -Rf /home/devoxx
+RUN mvn verify dependency:copy-dependencies -DskipTests && rm -Rf /home/devoxx
 
 # Set run environment
 #
