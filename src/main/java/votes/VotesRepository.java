@@ -1,16 +1,12 @@
 package votes;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+public interface VotesRepository {
+    void reload(VoteAction action);
 
-public class VotesRepository {
-  private final List<Vote> allVotes = new CopyOnWriteArrayList<>();
+    void vote(int winner, int looser);
 
-  public int size() {
-    return allVotes.size();
-  }
-
-  public void vote(int winner, int looser) {
-    allVotes.add(new Vote(winner, looser));
-  }
+    @FunctionalInterface
+    interface VoteAction {
+        void onVote(int winner, int looser);
+    }
 }
