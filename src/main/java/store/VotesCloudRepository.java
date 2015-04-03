@@ -6,8 +6,15 @@ public class VotesCloudRepository implements VotesRepository {
     private final DatastoreService dataStore;
 
     public VotesCloudRepository() {
-        DatastoreServiceOptions options = DatastoreServiceOptions.builder().dataset("vmruntime-demo").build();
-        this.dataStore = DatastoreServiceFactory.getDefault(options);
+        dataStore = createDataStore();
+    }
+
+    private DatastoreService createDataStore() {
+        DatastoreServiceOptions options = DatastoreServiceOptions.builder()
+                .dataset("devoxxcarpet")
+                .build();
+
+        return DatastoreServiceFactory.getDefault(options);
     }
 
     @Override
