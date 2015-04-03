@@ -4,3 +4,4 @@
 target/
 snapshots/
 /votes
+node_modules
