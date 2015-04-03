@@ -19,6 +19,7 @@ RUN mvn verify dependency:copy-dependencies -DskipTests && rm -Rf /home/devoxx
 #
 ENV PROD_MODE true
 ENV DATASTORE false
+#ENV DATASTORE true
 ENV MEMORY 4
 EXPOSE 8080
 CMD java -DPROD_MODE=${PROD_MODE} -Xmx${MEMORY}G -jar target/carpet.jar
