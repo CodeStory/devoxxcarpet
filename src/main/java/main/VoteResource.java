@@ -6,14 +6,14 @@ import votes.Votes;
 
 @Prefix("/votes")
 public class VoteResource {
-  private final Votes votes;
+    private final Votes votes;
 
-  public VoteResource(Votes votes) {
-    this.votes = votes;
-  }
+    public VoteResource(Votes votes) {
+        this.votes = votes;
+    }
 
-  @Post(":winner/:looser")
-  public void voteFirst(int winner, int looser) {
-    votes.vote(winner, looser);
-  }
+    @Post(":winner/:looser")
+    public void voteFirst(int winner, int looser) {
+        votes.vote(winner, looser);
+    }
 }
