@@ -1,0 +1,61 @@
+---
+layout: default
+title: CodeStory - Carpet Showdown
+ng-app: 'app'
+---
+
+<link rel="icon" type="image/png" href="/img/favicon.png"/>
+<link rel="apple-touch-icon" href="/img/favicon.png"/>
+
+[[webjar 'bootstrap.css']]
+[[css '/css/style']]
+
+[[webjar 'angular.js']]
+[[script '/js/underscore-min']]
+[[script '/js/controllers']]
+
+<div id="title">
+    <span>Carpet Showdown</span>
+</div>
+
+<div class="container" ng-controller="homeController" ng-cloak>
+    <div id="match" class="row">
+        <div class="col-md-6 vote" id="vote1">
+            <div class="image" ng-click="prefer_first()" ng-class="left.status">
+                <a href="#">
+                    <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{left.index}}.jpg"/>
+                </a>
+                <button>I prefer this one!</button>
+            </div>
+        </div>
+        <div class="col-md-6 vote" id="vote2">
+            <div class="image" ng-click="prefer_second()" ng-class="right.status">
+                <a href="#">
+                    <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{right.index}}.jpg"/>
+                </a>
+                <button>I prefer that one!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="top" class="row">
+        <div class="col-md-12">
+            <div class="rank rank{{top[i].rank}}" ng-repeat="i in [1,2,3,4,5]">
+                <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{i}}_small.jpg"/>
+
+                <p class="rank">#{{top[i].rank}}</p>
+
+                <p class="votes">
+                    <ng-pluralize count="top[i].carpet.votes"
+                                  when="{'0': 'no vote', 'one': '{} vote', 'other': '{} votes'}"></ng-pluralize>
+                </p>
+
+                <p class="scoreelo">ELO {{top[i].carpet.score}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; CodeStory 1987</p>
+</footer>
