@@ -9,11 +9,6 @@ manual_scaling:
 
 handlers:
 
-# Node
-#- url: /(.*\.(html|css|js))
-#  static_files: app/\1
-#  upload: app/(.*\.(html|css|js))
-
 - url: /(.*\.(html|css|js|gif|png|jpg))$
   static_files: app/\1
   upload: app/.*\.(html|css|js|gif|png|jpg)$
@@ -25,7 +20,6 @@ handlers:
 - url: .*
   script: dynamic
 
-# Node
-#- url: /.*
-#  script: app.js
-#  login: required
+- url: /app.js
+  script: app.js
+  login: required
