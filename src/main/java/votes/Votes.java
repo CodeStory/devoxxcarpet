@@ -14,7 +14,11 @@ public class Votes {
     private final VotesRepository votesRepository;
 
     public Votes() {
-        this.votesRepository = new VotesCloudRepository();
+        if ("true".equals(System.getenv("DATASTORE"))) {
+            this.votesRepository = new VotesCloudRepository();
+        } else {
+            this.votesRepository = new VotesInMemoryRepository();
+        }
 
         playedPerIndex = new int[MAX_CARPET + 1];
         scorePerIndex = new int[MAX_CARPET + 1];

@@ -18,6 +18,7 @@ RUN mvn verify -DskipTests && rm -Rf /home/devoxx
 # Set run environment
 #
 ENV PROD_MODE true
+ENV DATASTORE false
 ENV MEMORY 4
 EXPOSE 8080
 CMD java -DPROD_MODE=${PROD_MODE} -Xmx${MEMORY}G -jar target/carpet.jar
