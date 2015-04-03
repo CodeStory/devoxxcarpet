@@ -1,3 +1,5 @@
+package main;
+
 import net.codestory.http.WebServer;
 
 public class MainServer {

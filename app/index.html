@@ -1,19 +1,22 @@
----
-layout: default
-title: CodeStory - Carpet Showdown
-ng-app: 'app'
----
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>CodeStory - Carpet Showdown</title>
 
-<link rel="icon" type="image/png" href="/img/favicon.png"/>
-<link rel="apple-touch-icon" href="/img/favicon.png"/>
+    <link rel="icon" type="image/png" href="/img/favicon.png"/>
+    <link rel="apple-touch-icon" href="/img/favicon.png"/>
 
-[[webjar 'bootstrap.css']]
-[[css '/css/style']]
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
 
-[[webjar 'angular.js']]
-[[script '/js/underscore-min']]
-[[script '/js/controllers']]
+    <script src="/js/angular.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/livereload.js"></script>
+</head>
 
+<body>
 <div id="title">
     <span>Carpet Showdown</span>
 </div>
@@ -59,3 +62,6 @@ ng-app: 'app'
 <footer>
     <p>&copy; CodeStory 1987</p>
 </footer>
+
+</body>
+</html>

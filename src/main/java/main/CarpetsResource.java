@@ -1,3 +1,5 @@
+package main;
+
 import net.codestory.http.annotations.Get;
 import net.codestory.http.annotations.Prefix;
 import votes.Carpet;
