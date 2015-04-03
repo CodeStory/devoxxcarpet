@@ -8,18 +8,18 @@ FROM dgageot/maven
 
 # Set working directory first
 #
-WORKDIR /home/jug
+WORKDIR /home/devoxx
 
 # Set run environment
 #
 ENV PROD_MODE true
 ENV MEMORY 4
 EXPOSE 8080
-CMD java -DPROD_MODE=${PROD_MODE} -Xmx${MEMORY}G -jar target/jug.jar
+CMD java -DPROD_MODE=${PROD_MODE} -Xmx${MEMORY}G -jar target/carpet.jar
 
 # Add all sources from docker context
 #
-ADD . /home/jug
+ADD . /home/devoxx
 
 # Build the app
 #
