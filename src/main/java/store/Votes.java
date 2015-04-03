@@ -14,18 +14,22 @@ public class Votes {
     private final VotesRepository votesRepository;
 
     public Votes() {
-        if ("true".equals(System.getenv("DATASTORE"))) {
-            this.votesRepository = new VotesCloudRepository();
-        } else {
-            this.votesRepository = new VotesInMemoryRepository();
-        }
+        this.votesRepository = createVotesRepository();
 
-        playedPerIndex = new int[MAX_CARPET + 1];
-        scorePerIndex = new int[MAX_CARPET + 1];
+        this.playedPerIndex = new int[MAX_CARPET + 1];
+        this.scorePerIndex = new int[MAX_CARPET + 1];
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
 
         votesRepository.reload(this::computeVote);
+    }
+
+    private VotesRepository createVotesRepository() {
+        if ("true".equals(System.getenv("DATASTORE"))) {
+            return new DataStoreRepository();
+        } else {
+            return new InMemoryRepository();
+        }
     }
 
     public synchronized int score(int index) {

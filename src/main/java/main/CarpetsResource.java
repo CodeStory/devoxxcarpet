@@ -10,7 +10,6 @@ import java.util.*;
 
 @Prefix("/carpets")
 public class CarpetsResource {
-
     private final Random random;
     private final Votes votes;
 

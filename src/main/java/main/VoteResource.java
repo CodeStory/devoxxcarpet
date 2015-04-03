@@ -13,7 +13,7 @@ public class VoteResource {
     }
 
     @Post(":winner/:looser")
-    public void voteFirst(int winner, int looser) {
+    public void vote(int winner, int looser) {
         votes.vote(winner, looser);
     }
 }

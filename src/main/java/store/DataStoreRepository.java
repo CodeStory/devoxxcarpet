@@ -2,10 +2,10 @@ package store;
 
 import com.google.gcloud.datastore.*;
 
-public class VotesCloudRepository implements VotesRepository {
+public class DataStoreRepository implements VotesRepository {
     private final DatastoreService dataStore;
 
-    public VotesCloudRepository() {
+    public DataStoreRepository() {
         dataStore = createDataStore();
     }
 
@@ -38,7 +38,10 @@ public class VotesCloudRepository implements VotesRepository {
 
         Key key = keyFactory.newKey(System.currentTimeMillis()); // TODO
 
-        Entity entity = Entity.builder(key).set("winner", winner).set("looser", looser).build();
+        Entity entity = Entity.builder(key)
+                .set("winner", winner)
+                .set("looser", looser)
+                .build();
         dataStore.put(entity);
     }
 }

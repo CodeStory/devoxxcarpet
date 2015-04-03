@@ -1,6 +1,6 @@
 package store;
 
-public class VotesInMemoryRepository implements VotesRepository {
+public class InMemoryRepository implements VotesRepository {
     @Override
     public void reload(VoteAction action) {
     }
