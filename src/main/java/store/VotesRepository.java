@@ -1,4 +1,4 @@
-package votes;
+package store;
 
 public interface VotesRepository {
     void reload(VoteAction action);

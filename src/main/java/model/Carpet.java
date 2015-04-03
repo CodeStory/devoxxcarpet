@@ -1,4 +1,4 @@
-package votes;
+package model;
 
 import java.util.Objects;
 

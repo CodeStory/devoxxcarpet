@@ -1,4 +1,4 @@
-package votes;
+package model;
 
 public class RankedCarpet {
     public final int rank;

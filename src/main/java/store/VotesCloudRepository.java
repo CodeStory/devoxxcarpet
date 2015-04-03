@@ -1,4 +1,4 @@
-package votes;
+package store;
 
 import com.google.gcloud.datastore.*;
 

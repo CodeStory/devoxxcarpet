@@ -1,10 +1,10 @@
 package main;
 
+import model.Carpet;
+import model.RankedCarpet;
 import net.codestory.http.annotations.Get;
 import net.codestory.http.annotations.Prefix;
-import votes.Carpet;
-import votes.RankedCarpet;
-import votes.Votes;
+import store.Votes;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package votes;
+package store;
 
 public class VotesInMemoryRepository implements VotesRepository {
     @Override
