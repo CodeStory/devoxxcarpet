@@ -52,4 +52,3 @@ gcloud preview app deploy .
 TODO:
 
  + Dockerfile switching
- + appengine adapter
