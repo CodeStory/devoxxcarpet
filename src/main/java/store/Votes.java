@@ -1,16 +1,14 @@
 package store;
 
-import com.google.common.util.concurrent.AtomicLongMap;
-
 import java.util.Arrays;
 
 public class Votes {
     public static final int MAX_CARPET = 5;
     private static final int START_SCORE = 1000;
 
-    private final AtomicLongMap<Integer> votes = AtomicLongMap.create();
     private final int[] playedPerIndex;
     private final int[] scorePerIndex;
+    private final int[] votesPerIndex;
     private final VotesRepository votesRepository;
 
     public Votes() {
@@ -18,8 +16,10 @@ public class Votes {
 
         this.playedPerIndex = new int[MAX_CARPET + 1];
         this.scorePerIndex = new int[MAX_CARPET + 1];
+        this.votesPerIndex = new int[MAX_CARPET + 1];
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
+        Arrays.fill(votesPerIndex, 0);
 
         votesRepository.reload(this::computeVote);
     }
@@ -36,8 +36,8 @@ public class Votes {
         return scorePerIndex[index];
     }
 
-    public int votes(int index) {
-        return (int) votes.get(index);
+    public synchronized int votes(int index) {
+        return votesPerIndex[index];
     }
 
     public synchronized void vote(int winner, int looser) {
@@ -56,7 +56,7 @@ public class Votes {
         int r1 = Math.round(score1 + (k1 * (1 - p)));
         int r2 = Math.round(score2 + (k2 * (0 - p)));
 
-        votes.incrementAndGet(winner);
+        votesPerIndex[winner]++;
         scorePerIndex[winner] = r1;
         scorePerIndex[looser] = r2;
     }

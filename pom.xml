@@ -41,11 +41,6 @@
             <version>2.90</version>
         </dependency>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>18.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.gcloud</groupId>
             <artifactId>gcloud-java</artifactId>
             <version>0.0.3</version>
