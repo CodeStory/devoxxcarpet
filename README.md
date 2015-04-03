@@ -9,7 +9,7 @@ Run locally with Docker:
 
 ```bash
 docker build -t dgageot/devoxxcarpet .
-docker run --rm -ti dgageot/devoxxcarpet
+docker run --rm -ti -p 8080:8080 dgageot/devoxxcarpet
 ```
 
 Run locally with Docker using the CloudDataStore:
@@ -51,6 +51,5 @@ gcloud preview app deploy .
 
 TODO:
 
- + Make docker-machine work
  + Dockerfile switching
  + appengine adapter
