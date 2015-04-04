@@ -33,5 +33,7 @@ app = angular.module 'app', []
     @refresh_after_animation()
 
   refresh_after_animation: ->
-    @$timeout(@refresh, 1000)
+    @$timeout =>
+      @refresh()
+    , 1000
 
