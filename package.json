@@ -7,7 +7,7 @@
     "appengine": "git://github.com/GoogleCloudPlatform/appengine-nodejs.git",
     "express": "3.x",
     "fs": "0.0.2",
-    "less": "^2.5.0"
+    "less": "2.5.0"
   },
   "scripts": {
     "start": "coffee server.coffee"
