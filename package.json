@@ -4,8 +4,11 @@
   "version": "0.0.1",
   "repository": "git@github.com:CodeStory/devoxxcarpet.git",
   "dependencies": {
+    "appengine": "git://github.com/GoogleCloudPlatform/appengine-nodejs.git",
     "express": "3.x",
-    "appengine": "git://github.com/GoogleCloudPlatform/appengine-nodejs.git"
+    "fs": "0.0.2"
   },
-  "scripts": {"start": "coffee server.coffee"}
+  "scripts": {
+    "start": "coffee server.coffee"
+  }
 }

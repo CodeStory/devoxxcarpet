@@ -1,8 +1,11 @@
-appengine = require('appengine')
-express = require('express')
+appengine = require 'appengine'
+express = require 'express'
+fs = require 'fs'
+coffee = require 'coffee-script'
 
 app = express()
 
+app.use(express.static(__dirname + '/app'))
 app.use(appengine.middleware.base)
 
 app.get '/_ah/health', (req, res) ->
@@ -34,9 +37,13 @@ app.get '/carpets/top', (req, res) ->
     5: {rank: 5, carpet: {index: 5, score: 100, votes: 10}}
   res.send(JSON.stringify(top))
 
+app.get '/js/controllers.js', (req, res) ->
+  res.header 'Content-Type', 'application/x-javascript'
+  cs = fs.readFileSync("#{__dirname}/app/js/controllers.coffee", 'ascii')
+  js = coffee.compile(cs)
+  res.send js
+
 app.post '/votes/:winner/:looser', (req, res) ->
   res.send('')
-
-app.use(express.static(__dirname + '/app'))
 
 app.listen(8080)
