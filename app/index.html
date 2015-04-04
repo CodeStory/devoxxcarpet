@@ -37,10 +37,10 @@
 
     <div id="top">
         <div>
-            <div class="rank rank{{home.top[i].rank}}" ng-repeat="i in [1,2,3,4,5]">
+            <div class="rank rank{{home.top[i].rank}}" ng-repeat="i in [0,1,2,3,4]">
                 <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{i}}.jpg"/>
 
-                <p class="rank">#{{home.top[i].rank}}</p>
+                <p class="rank">#{{home.top[i].rank + 1}}</p>
 
                 <p class="votes">
                     <ng-pluralize count="home.top[i].carpet.votes"

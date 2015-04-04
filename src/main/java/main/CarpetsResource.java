@@ -20,28 +20,27 @@ public class CarpetsResource {
 
     @Get("match")
     public Carpet[] match() {
-        int firstIndex;
-        int secondIndex;
+        int first;
+        int second;
         do {
-            firstIndex = randomIndex();
-            secondIndex = randomIndex();
-        } while (firstIndex == secondIndex);
+            first = randomIndex();
+            second = randomIndex();
+        } while (first == second);
 
-        return new Carpet[]{carpet(firstIndex), carpet(secondIndex)};
+        return new Carpet[]{carpet(first), carpet(second)};
     }
 
     @Get("top")
     public Map<Integer, RankedCarpet> top() {
         List<Carpet> all = new ArrayList<>();
-        for (int i = 1; i <= Votes.MAX_CARPET; i++) {
+        for (int i = 0; i < Votes.MAX_CARPET; i++) {
             all.add(carpet(i));
         }
 
-        Collections.sort(all);
-        Collections.reverse(all);
+        Collections.sort(all, (l, r) -> r.score - l.score);
 
         Map<Integer, RankedCarpet> ranked = new LinkedHashMap<>();
-        int rank = 1;
+        int rank = 0;
         for (Carpet carpet : all) {
             ranked.put(carpet.index, new RankedCarpet(rank++, carpet));
         }
@@ -49,7 +48,7 @@ public class CarpetsResource {
     }
 
     private int randomIndex() {
-        return 1 + random.nextInt(Votes.MAX_CARPET);
+        return random.nextInt(Votes.MAX_CARPET);
     }
 
     private Carpet carpet(int index) {

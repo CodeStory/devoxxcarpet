@@ -13,9 +13,9 @@ public class Votes {
 
     public Votes() {
         this.votesRepository = createVotesRepository();
-        this.playedPerIndex = new int[MAX_CARPET + 1];
-        this.scorePerIndex = new int[MAX_CARPET + 1];
-        this.votesPerIndex = new int[MAX_CARPET + 1];
+        this.playedPerIndex = new int[MAX_CARPET];
+        this.scorePerIndex = new int[MAX_CARPET];
+        this.votesPerIndex = new int[MAX_CARPET];
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
         Arrays.fill(votesPerIndex, 0);
