@@ -1,67 +1,82 @@
 package store;
 
-import com.google.gcloud.datastore.*;
+import com.google.api.services.datastore.DatastoreV1;
+import com.google.api.services.datastore.DatastoreV1.*;
+import com.google.api.services.datastore.client.Datastore;
+import com.google.api.services.datastore.client.DatastoreFactory;
+import com.google.api.services.datastore.client.DatastoreOptions;
+import com.google.protobuf.ByteString;
+
+import java.util.Random;
+
+import static com.google.api.services.datastore.DatastoreV1.KindExpression.newBuilder;
+import static com.google.api.services.datastore.client.DatastoreHelper.*;
 
 public class DataStoreRepository implements VotesRepository {
-    private final DatastoreService dataStore;
-    private final KeyFactory keyFactory;
+    private final Datastore dataStore;
+    private final String serverId;
+
+    private ByteString cursor;
 
     public DataStoreRepository() {
         this.dataStore = createDataStore();
-        this.keyFactory = dataStore.newKeyFactory().kind("Match");
+        this.serverId = System.currentTimeMillis() + "-" + new Random().nextLong();
     }
 
-    private DatastoreService createDataStore() {
-        return DatastoreServiceFactory.getDefault(
-                DatastoreServiceOptions
-                        .builder()
-                        .dataset("devoxxcarpet")
-                        .authCredentials(Authentication.get())
-                        .build());
-    }
-
-    @Override
-    public void reload(VoteAction action) {
-        StructuredQuery<Entity> query = GqlQuery
-                .entityQueryBuilder()
-                .kind("Match")
-                .build();
-
-        dataStore.run(query).forEachRemaining(match -> {
-            int winner = (int) match.getLong("winner");
-            int looser = (int) match.getLong("looser");
-
-            action.onVote(winner, looser);
-        });
-    }
-
-    @Override
-    public void vote(int winner, int looser) {
-        Key key = dataStore.allocateId(keyFactory.newKey());
-
-        dataStore.put(Entity
-                .builder(key)
-                .set("date", DateTime.now())
-                .set("winner", winner)
-                .set("looser", looser)
+    private Datastore createDataStore() {
+        return DatastoreFactory.get().create(new DatastoreOptions.Builder()
+                .dataset("devoxxcarpet")
+                .credential(Authentication.get())
                 .build());
     }
 
     @Override
-    public void init() {
-        // First try fails. I don't know why
+    public void refresh(VoteAction action) {
         try {
-            StructuredQuery<Entity> query = GqlQuery
-                    .entityQueryBuilder()
-                    .kind("Match")
-                    .build();
+            Query.Builder query = Query.newBuilder().addKind(newBuilder().setName("Match"));
+            if (cursor != null) {
+                query.setStartCursor(cursor);
+            }
 
-            dataStore.run(query).forEachRemaining(match -> {
-                match.getLong("winner");
-                match.getLong("looser");
+            QueryResultBatch batch = dataStore.runQuery(RunQueryRequest.newBuilder().setQuery(query).build()).getBatch();
+
+            batch.getEntityResultList().forEach(result -> {
+                Entity entity = result.getEntity();
+                String server = entity.getProperty(2).getValue().getStringValue();
+
+                if (!serverId.equals(server)) {
+                    int winner = (int) entity.getProperty(0).getValue().getIntegerValue();
+                    int looser = (int) entity.getProperty(1).getValue().getIntegerValue();
+
+                    action.onVote(winner, looser);
+                }
             });
+
+            cursor = batch.getEndCursor();
         } catch (Exception e) {
-            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void vote(int winner, int looser) {
+        try {
+            BeginTransactionResponse tres = dataStore.beginTransaction(BeginTransactionRequest.newBuilder().build());
+
+            CommitRequest.Builder creq = CommitRequest
+                    .newBuilder()
+                    .setTransaction(tres.getTransaction());
+
+            creq.getMutationBuilder().addInsertAutoId(DatastoreV1.Entity
+                    .newBuilder()
+                    .setKey(makeKey("Match"))
+                    .addProperty(makeProperty("server", makeValue(serverId)))
+                    .addProperty(makeProperty("winner", makeValue(winner)))
+                    .addProperty(makeProperty("looser", makeValue(looser))));
+
+            dataStore.commit(creq.build());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

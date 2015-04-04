@@ -1,7 +1,8 @@
 package store;
 
+import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.util.SecurityUtils;
-import com.google.gcloud.AuthCredentials;
+import com.google.api.services.datastore.client.DatastoreHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,8 +16,15 @@ public class Authentication {
     private static final String ALIAS = "privatekey";
     private static final String KEY_PASS = "notasecret";
 
-    public static AuthCredentials get() {
-        return AuthCredentials.createFor(ACCOUNT, readPrivateKey(PRIVATE_KEY));
+    public static Credential get() {
+        try {
+            return DatastoreHelper.getServiceAccountCredential(
+                    ACCOUNT,
+                    readPrivateKey(PRIVATE_KEY),
+                    com.google.api.services.datastore.client.DatastoreOptions.SCOPES);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static PrivateKey readPrivateKey(String name) {

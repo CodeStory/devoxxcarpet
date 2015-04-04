@@ -24,8 +24,7 @@ public class Votes {
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
         Arrays.fill(votesPerIndex, 0);
-        votesRepository.init();
-        votesRepository.reload(this::computeVote);
+        votesRepository.refresh(this::computeVote);
     }
 
     private VotesRepository createVotesRepository() {
@@ -36,6 +35,14 @@ public class Votes {
         }
     }
 
+    public void vote(int winner, int looser) {
+        computeVote(winner, looser);
+        executor.execute(() -> {
+            votesRepository.vote(winner, looser);
+            votesRepository.refresh(this::computeVote); // Could be done less often
+        });
+    }
+
     public synchronized int score(int index) {
         return scorePerIndex[index];
     }
@@ -44,14 +51,7 @@ public class Votes {
         return votesPerIndex[index];
     }
 
-    public synchronized void vote(int winner, int looser) {
-        computeVote(winner, looser);
-        executor.execute(() -> {
-            votesRepository.vote(winner, looser);
-        });
-    }
-
-    void computeVote(int winner, int looser) {
+    synchronized void computeVote(int winner, int looser) {
         int score1 = scorePerIndex[winner];
         int score2 = scorePerIndex[looser];
         int d = Math.min(400, Math.abs(score1 - score2));
