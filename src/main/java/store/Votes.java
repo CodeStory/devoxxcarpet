@@ -1,6 +1,8 @@
 package store;
 
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -24,7 +26,15 @@ public class Votes {
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
         Arrays.fill(votesPerIndex, 0);
+
         votesRepository.refresh(this::computeVote);
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                executor.execute(() -> votesRepository.refresh(Votes.this::computeVote));
+            }
+        }, 1000, 1000);
     }
 
     private VotesRepository createVotesRepository() {
@@ -37,10 +47,7 @@ public class Votes {
 
     public void vote(int winner, int looser) {
         computeVote(winner, looser);
-        executor.execute(() -> {
-            votesRepository.vote(winner, looser);
-            votesRepository.refresh(this::computeVote); // Could be done less often
-        });
+        executor.execute(() -> votesRepository.vote(winner, looser));
     }
 
     public synchronized int score(int index) {

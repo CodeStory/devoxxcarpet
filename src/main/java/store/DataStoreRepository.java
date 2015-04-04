@@ -7,9 +7,11 @@ import com.google.api.services.datastore.client.DatastoreFactory;
 import com.google.api.services.datastore.client.DatastoreOptions;
 import com.google.protobuf.ByteString;
 
+import java.util.Date;
 import java.util.Random;
 
 import static com.google.api.services.datastore.DatastoreV1.KindExpression.newBuilder;
+import static com.google.api.services.datastore.DatastoreV1.PropertyOrder.Direction.ASCENDING;
 import static com.google.api.services.datastore.client.DatastoreHelper.*;
 
 public class DataStoreRepository implements VotesRepository {
@@ -20,7 +22,8 @@ public class DataStoreRepository implements VotesRepository {
 
     public DataStoreRepository() {
         this.dataStore = createDataStore();
-        this.serverId = System.currentTimeMillis() + "-" + new Random().nextLong();
+        this.serverId = System.currentTimeMillis() + "-" + Math.abs(new Random().nextLong());
+        System.out.println("SERVER " + serverId);
     }
 
     private Datastore createDataStore() {
@@ -33,7 +36,7 @@ public class DataStoreRepository implements VotesRepository {
     @Override
     public void refresh(VoteAction action) {
         try {
-            Query.Builder query = Query.newBuilder().addKind(newBuilder().setName("Match"));
+            Query.Builder query = Query.newBuilder().addKind(newBuilder().setName("Match")).addOrder(PropertyOrder.newBuilder().setProperty(makePropertyReference("date")).setDirection(ASCENDING));
             if (cursor != null) {
                 query.setStartCursor(cursor);
             }
@@ -45,8 +48,8 @@ public class DataStoreRepository implements VotesRepository {
                 String server = entity.getProperty(2).getValue().getStringValue();
 
                 if (!serverId.equals(server)) {
-                    int winner = (int) entity.getProperty(0).getValue().getIntegerValue();
-                    int looser = (int) entity.getProperty(1).getValue().getIntegerValue();
+                    int winner = (int) entity.getProperty(1).getValue().getIntegerValue();
+                    int looser = (int) entity.getProperty(0).getValue().getIntegerValue();
 
                     action.onVote(winner, looser);
                 }
@@ -70,6 +73,7 @@ public class DataStoreRepository implements VotesRepository {
             creq.getMutationBuilder().addInsertAutoId(DatastoreV1.Entity
                     .newBuilder()
                     .setKey(makeKey("Match"))
+                    .addProperty(makeProperty("date", makeValue(new Date())))
                     .addProperty(makeProperty("server", makeValue(serverId)))
                     .addProperty(makeProperty("winner", makeValue(winner)))
                     .addProperty(makeProperty("looser", makeValue(looser))));
