@@ -24,6 +24,7 @@ public class Votes {
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
         Arrays.fill(votesPerIndex, 0);
+        votesRepository.init();
         votesRepository.reload(this::computeVote);
     }
 
@@ -45,7 +46,9 @@ public class Votes {
 
     public synchronized void vote(int winner, int looser) {
         computeVote(winner, looser);
-        executor.execute(() -> votesRepository.vote(winner, looser));
+        executor.execute(() -> {
+            votesRepository.vote(winner, looser);
+        });
     }
 
     void computeVote(int winner, int looser) {

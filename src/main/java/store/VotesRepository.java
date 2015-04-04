@@ -1,6 +1,8 @@
 package store;
 
 public interface VotesRepository {
+    void init();
+
     void reload(VoteAction action);
 
     void vote(int winner, int looser);

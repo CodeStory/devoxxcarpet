@@ -2,6 +2,10 @@ package store;
 
 public class InMemoryRepository implements VotesRepository {
     @Override
+    public void init() {
+    }
+
+    @Override
     public void reload(VoteAction action) {
     }
 
