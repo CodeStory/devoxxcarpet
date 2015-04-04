@@ -6,12 +6,8 @@
 
     <link rel="icon" type="image/png" href="/img/favicon.png"/>
     <link rel="apple-touch-icon" href="/img/favicon.png"/>
-
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
-
-    <script src="/js/angular.js"></script>
-    <script src="/js/controllers.js"></script>
 </head>
 
 <body>
@@ -22,7 +18,7 @@
 <div class="container" ng-controller="HomeController as home" ng-cloak>
     <div id="match" class="row">
         <div class="col-md-6 vote" id="vote1">
-            <div class="image" ng-click="home.prefer_first()" ng-class="home.left.status">
+            <div class="image" ng-click="home.preferFirst()" ng-class="home.left.status">
                 <a href="#">
                     <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{home.left.index}}.jpg"/>
                 </a>
@@ -30,7 +26,7 @@
             </div>
         </div>
         <div class="col-md-6 vote" id="vote2">
-            <div class="image" ng-click="home.prefer_second()" ng-class="home.right.status">
+            <div class="image" ng-click="home.preferSecond()" ng-class="home.right.status">
                 <a href="#">
                     <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{home.right.index}}.jpg"/>
                 </a>
@@ -60,6 +56,9 @@
 <footer>
     <p>&copy; CodeStory 1987</p>
 </footer>
+
+<script src="/js/angular.js"></script>
+<script src="/js/controllers.js"></script>
 
 </body>
 </html>
