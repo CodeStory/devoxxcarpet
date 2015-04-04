@@ -17,9 +17,11 @@ public class DataStoreRepository implements VotesRepository {
     private static final String KEY_PASS = "notasecret";
 
     private final DatastoreService dataStore;
+    private final KeyFactory keyFactory;
 
     public DataStoreRepository() {
-        dataStore = createDataStore();
+        this.dataStore = createDataStore();
+        this.keyFactory = dataStore.newKeyFactory().kind("Match");
     }
 
     private DatastoreService createDataStore() {
@@ -69,15 +71,13 @@ public class DataStoreRepository implements VotesRepository {
 
     @Override
     public void vote(int winner, int looser) {
-        KeyFactory keyFactory = dataStore.newKeyFactory().kind("Match");
-
         Key key = dataStore.allocateId(keyFactory.newKey());
 
-        Entity entity = Entity.builder(key)
+        dataStore.put(Entity
+                .builder(key)
                 .set("date", DateTime.now())
                 .set("winner", winner)
                 .set("looser", looser)
-                .build();
-        dataStore.put(entity);
+                .build());
     }
 }
