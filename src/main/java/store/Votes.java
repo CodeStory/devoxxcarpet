@@ -13,7 +13,6 @@ public class Votes {
 
     public Votes() {
         this.votesRepository = createVotesRepository();
-
         this.playedPerIndex = new int[MAX_CARPET + 1];
         this.scorePerIndex = new int[MAX_CARPET + 1];
         this.votesPerIndex = new int[MAX_CARPET + 1];
