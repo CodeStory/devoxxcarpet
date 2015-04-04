@@ -1,28 +1,29 @@
 app = angular.module 'app', []
 
-.controller 'homeController', ($scope, $http, $timeout) ->
-  console.log 'hello'
-  $scope.prefer_first = ->
-    $http.post("/votes/#{$scope.left.index}/#{$scope.right.index}").success ->
-      $scope.settle_match('winner', 'looser')
+.controller 'HomeController', class
+  constructor: (@$http, @$timeout) ->
+    @refresh()
 
-  $scope.prefer_second = ->
-    $http.post("/votes/#{$scope.right.index}/#{$scope.left.index}").success ->
-      $scope.settle_match('looser', 'winner')
+  prefer_first: =>
+    @$http.post("/votes/#{@left.index}/#{@right.index}").success =>
+      @settle_match('winner', 'looser')
 
-  $scope.refresh = ->
-    $http.get('/carpets/match').success (data) ->
-      [$scope.left, $scope.right] = data
+  prefer_second: =>
+    @$http.post("/votes/#{@right.index}/#{@left.index}").success =>
+      @settle_match('looser', 'winner')
 
-    $http.get('/carpets/top').success (data) ->
-      $scope.top = data
+  refresh: =>
+    @$http.get('/carpets/match').success (data) =>
+      [@left, @right] = data
 
-  $scope.settle_match = (left_status, right_status) ->
-    $scope.left.status = left_status
-    $scope.right.status = right_status
-    $scope.refresh_after_animation()
+    @$http.get('/carpets/top').success (data) =>
+      @top = data
 
-  $scope.refresh_after_animation = ->
-    $timeout($scope.refresh, 1500)
+  settle_match: (left_status, right_status) =>
+    @left.status = left_status
+    @right.status = right_status
+    @refresh_after_animation()
 
-  $scope.refresh()
+  refresh_after_animation: =>
+    @$timeout(@refresh, 1500)
+

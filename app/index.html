@@ -19,20 +19,20 @@
     <span>Carpet Showdown</span>
 </div>
 
-<div class="container" ng-controller="homeController" ng-cloak>
+<div class="container" ng-controller="HomeController as home" ng-cloak>
     <div id="match" class="row">
         <div class="col-md-6 vote" id="vote1">
-            <div class="image" ng-click="prefer_first()" ng-class="left.status">
+            <div class="image" ng-click="home.prefer_first()" ng-class="home.left.status">
                 <a href="#">
-                    <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{left.index}}.jpg"/>
+                    <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{home.left.index}}.jpg"/>
                 </a>
                 <button>I prefer this one!</button>
             </div>
         </div>
         <div class="col-md-6 vote" id="vote2">
-            <div class="image" ng-click="prefer_second()" ng-class="right.status">
+            <div class="image" ng-click="home.prefer_second()" ng-class="home.right.status">
                 <a href="#">
-                    <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{right.index}}.jpg"/>
+                    <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{home.right.index}}.jpg"/>
                 </a>
                 <button>I prefer that one!</button>
             </div>
@@ -41,17 +41,17 @@
 
     <div id="top" class="row">
         <div class="col-md-12">
-            <div class="rank rank{{top[i].rank}}" ng-repeat="i in [1,2,3,4,5]">
+            <div class="rank rank{{home.top[i].rank}}" ng-repeat="i in [1,2,3,4,5]">
                 <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{i}}_small.jpg"/>
 
-                <p class="rank">#{{top[i].rank}}</p>
+                <p class="rank">#{{home.top[i].rank}}</p>
 
                 <p class="votes">
-                    <ng-pluralize count="top[i].carpet.votes"
+                    <ng-pluralize count="home.top[i].carpet.votes"
                                   when="{'0': 'no vote', 'one': '{} vote', 'other': '{} votes'}"></ng-pluralize>
                 </p>
 
-                <p class="scoreelo">ELO {{top[i].carpet.score}}</p>
+                <p class="scoreelo">ELO {{home.top[i].carpet.score}}</p>
             </div>
         </div>
     </div>
