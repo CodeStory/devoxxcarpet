@@ -42,9 +42,6 @@ app.post('/votes/:winner/:looser', function(req, res) {
   res.send('');
 });
 
-app.configure(function(){
-	app.use(express.static(__dirname + '/app'));
-});
+app.use(express.static(__dirname + '/app'));
 
 app.listen(8080, '0.0.0.0');
-console.log('Listening on port 8080');
