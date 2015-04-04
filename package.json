@@ -6,5 +6,6 @@
   "dependencies": {
     "express": "3.x",
     "appengine": "git://github.com/GoogleCloudPlatform/appengine-nodejs.git"
-  }
+  },
+  "scripts": {"start": "coffee server.coffee"}
 }
