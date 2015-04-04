@@ -4,9 +4,10 @@ fs = require 'fs'
 coffee = require 'coffee-script'
 less = require 'less'
 
-playedPerIndex = (0 for i in [1..5])
-scorePerIndex = (1000 for i in [1..5])
-votesPerIndex = (0 for i in [1..5])
+CARPET_COUNT = 10
+playedPerIndex = (0 for i in [0...CARPET_COUNT])
+scorePerIndex = (1000 for i in [0...CARPET_COUNT])
+votesPerIndex = (0 for i in [0...CARPET_COUNT])
 
 app = express()
 
@@ -27,7 +28,7 @@ app.get '/_ah/stop', (req, res) ->
   process.exit()
 
 app.get '/carpets/match', (req, res) ->
-  [left, right] = [Math.floor(Math.random() * 5), Math.floor(Math.random() * 5)] while (left is right)
+  [left, right] = [Math.floor(Math.random() * CARPET_COUNT), Math.floor(Math.random() * CARPET_COUNT)] while (left is right)
 
   carpets = [
     {index: left, score: scorePerIndex[left], votes: votesPerIndex[left]}
@@ -36,11 +37,11 @@ app.get '/carpets/match', (req, res) ->
   res.send(JSON.stringify(carpets))
 
 app.get '/carpets/top', (req, res) ->
-  carpets = ({index: i, votes: votesPerIndex[i]} for i in [0..4])
+  carpets = ({index: i, votes: votesPerIndex[i]} for i in [0...CARPET_COUNT])
   carpets.sort (l,r) -> r.votes - l.votes
 
   top = {}
-  for rank in [0..4]
+  for rank in [0...CARPET_COUNT]
     carpet = carpets[rank]
     top[carpet.index] = {rank: rank, carpet: carpet}
 

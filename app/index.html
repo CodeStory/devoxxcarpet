@@ -20,7 +20,7 @@
     <div class="vote" id="vote1">
         <div class="image" ng-click="home.preferFirst()">
             <a href="#">
-                <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{home.left.index}}.jpg"/>
+                <img class="img-thumbnail" ng-src="/img/carpet{{home.left.index}}.jpg"/>
             </a>
             <button>I prefer this one!</button>
         </div>
@@ -29,7 +29,7 @@
     <div class="vote" id="vote2">
         <div class="image" ng-click="home.preferSecond()">
             <a href="#">
-                <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{home.right.index}}.jpg"/>
+                <img class="img-thumbnail" ng-src="/img/carpet{{home.right.index}}.jpg"/>
             </a>
             <button>I prefer that one!</button>
         </div>
@@ -37,8 +37,8 @@
 
     <div id="top">
         <div>
-            <div class="rank rank{{home.top[i].rank}}" ng-repeat="i in [0,1,2,3,4]">
-                <img class="img-thumbnail" ng-src="/img/carpetdevoxx{{i}}.jpg"/>
+            <div class="rank rank{{home.top[i].rank}}" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]">
+                <img class="img-thumbnail" ng-src="/img/carpet{{i}}.jpg"/>
 
                 <p class="rank">#{{home.top[i].rank + 1}}</p>
 

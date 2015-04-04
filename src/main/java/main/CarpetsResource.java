@@ -33,7 +33,7 @@ public class CarpetsResource {
     @Get("top")
     public Map<Integer, RankedCarpet> top() {
         List<Carpet> all = new ArrayList<>();
-        for (int i = 0; i < Votes.MAX_CARPET; i++) {
+        for (int i = 0; i < Votes.CARPET_COUNT; i++) {
             all.add(carpet(i));
         }
 
@@ -48,7 +48,7 @@ public class CarpetsResource {
     }
 
     private int randomIndex() {
-        return random.nextInt(Votes.MAX_CARPET);
+        return random.nextInt(Votes.CARPET_COUNT);
     }
 
     private Carpet carpet(int index) {

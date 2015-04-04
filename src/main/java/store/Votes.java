@@ -5,7 +5,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Votes {
-    public static final int MAX_CARPET = 5;
+    public static final int CARPET_COUNT = 10;
     private static final int START_SCORE = 1000;
 
     private final int[] playedPerIndex;
@@ -16,9 +16,9 @@ public class Votes {
 
     public Votes() {
         this.votesRepository = createVotesRepository();
-        this.playedPerIndex = new int[MAX_CARPET];
-        this.scorePerIndex = new int[MAX_CARPET];
-        this.votesPerIndex = new int[MAX_CARPET];
+        this.playedPerIndex = new int[CARPET_COUNT];
+        this.scorePerIndex = new int[CARPET_COUNT];
+        this.votesPerIndex = new int[CARPET_COUNT];
         this.executor = Executors.newSingleThreadExecutor();
 
         Arrays.fill(playedPerIndex, 0);
