@@ -4,6 +4,10 @@ fs = require 'fs'
 coffee = require 'coffee-script'
 less = require 'less'
 
+playedPerIndex = [undefined, 0, 0, 0, 0, 0]
+scorePerIndex = [undefined, 1000, 1000, 1000, 1000, 1000]
+votesPerIndex = [undefined, 0, 0, 0, 0, 0]
+
 app = express()
 
 app.use(express.static(__dirname + '/app'))
@@ -23,19 +27,23 @@ app.get '/_ah/stop', (req, res) ->
   process.exit()
 
 app.get '/carpets/match', (req, res) ->
+  [left, right] = [Math.floor(Math.random() * 5 + 1), Math.floor(Math.random() * 5 + 1)] while (left is right)
+
   carpets = [
-    {index: 1, score: 100, votes: 10}
-    {index: 2, score: 200, votes: 5}
+    {index: left, score: scorePerIndex[left], votes: votesPerIndex[left]}
+    {index: right, score: scorePerIndex[right], votes: votesPerIndex[right]}
   ]
   res.send(JSON.stringify(carpets))
 
 app.get '/carpets/top', (req, res) ->
-  top =
-    1: {rank: 1, carpet: {index: 1, score: 100, votes: 10}}
-    2: {rank: 2, carpet: {index: 2, score: 100, votes: 10}}
-    3: {rank: 3, carpet: {index: 3, score: 100, votes: 10}}
-    4: {rank: 4, carpet: {index: 4, score: 100, votes: 10}}
-    5: {rank: 5, carpet: {index: 5, score: 100, votes: 10}}
+  carpets = ({index: i, votes: votesPerIndex[i]} for i in [1..5])
+  carpets.sort (l,r) -> r.votes - l.votes
+
+  top = {}
+  for rank in [0..4]
+    carpet = carpets[rank]
+    top[carpet.index] = {rank: rank+1, carpet: carpet}
+
   res.send(JSON.stringify(top))
 
 app.get '/js/controllers.js', (req, res) ->
@@ -50,7 +58,29 @@ app.get '/css/style.css', (req, res) ->
     res.header 'Content-Type', 'text/css'
     res.send output.css
 
+k = (score, played) ->
+  #return played < 30 ? 25 : score < 2400 ? 15 : 10;
+  if played < 30 then 25 else (if score < 2400 then 15 else 10)
+
 app.post '/votes/:winner/:looser', (req, res) ->
+  winner = +req.params.winner
+  looser = +req.params.looser
+  score1 = scorePerIndex[winner]
+  score2 = scorePerIndex[looser]
+
+  d = Math.min(400, Math.abs(score1 - score2))
+  p = 1.0 / (1.0 + Math.pow(10, -d / 400.0))
+
+  k1 = k(score1, ++playedPerIndex[winner])
+  k2 = k(score2, ++playedPerIndex[looser])
+
+  r1 = Math.round(score1 + (k1 * (1 - p)))
+  r2 = Math.round(score2 + (k2 * (0 - p)))
+
+  votesPerIndex[winner]++
+  scorePerIndex[winner] = r1
+  scorePerIndex[looser] = r2
   res.send('')
 
 app.listen(8080)
+
