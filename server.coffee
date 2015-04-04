@@ -2,6 +2,7 @@ appengine = require 'appengine'
 express = require 'express'
 fs = require 'fs'
 coffee = require 'coffee-script'
+less = require 'less'
 
 app = express()
 
@@ -38,10 +39,16 @@ app.get '/carpets/top', (req, res) ->
   res.send(JSON.stringify(top))
 
 app.get '/js/controllers.js', (req, res) ->
-  res.header 'Content-Type', 'application/x-javascript'
-  cs = fs.readFileSync("#{__dirname}/app/js/controllers.coffee", 'ascii')
+  cs = fs.readFileSync("#{__dirname}/app/js/controllers.coffee", 'UTF-8')
   js = coffee.compile(cs)
+  res.header 'Content-Type', 'application/x-javascript'
   res.send js
+
+app.get '/css/style.css', (req, res) ->
+  source = fs.readFileSync("#{__dirname}/app/css/style.less", 'UTF-8')
+  less.render source, (e, output) ->
+    res.header 'Content-Type', 'text/css'
+    res.send output.css
 
 app.post '/votes/:winner/:looser', (req, res) ->
   res.send('')
