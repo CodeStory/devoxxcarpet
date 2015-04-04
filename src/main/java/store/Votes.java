@@ -1,6 +1,8 @@
 package store;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Votes {
     public static final int MAX_CARPET = 5;
@@ -10,16 +12,18 @@ public class Votes {
     private final int[] scorePerIndex;
     private final int[] votesPerIndex;
     private final VotesRepository votesRepository;
+    private final Executor executor;
 
     public Votes() {
         this.votesRepository = createVotesRepository();
         this.playedPerIndex = new int[MAX_CARPET];
         this.scorePerIndex = new int[MAX_CARPET];
         this.votesPerIndex = new int[MAX_CARPET];
+        this.executor = Executors.newSingleThreadExecutor();
+
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
         Arrays.fill(votesPerIndex, 0);
-
         votesRepository.reload(this::computeVote);
     }
 
@@ -40,8 +44,8 @@ public class Votes {
     }
 
     public synchronized void vote(int winner, int looser) {
-        votesRepository.vote(winner, looser);
         computeVote(winner, looser);
+        executor.execute(() -> votesRepository.vote(winner, looser));
     }
 
     void computeVote(int winner, int looser) {
