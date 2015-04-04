@@ -45,7 +45,9 @@ public class DataStoreRepository implements VotesRepository {
 
     @Override
     public void reload(VoteAction action) {
-        StructuredQuery<Entity> query = GqlQuery.entityQueryBuilder().kind("Match").build();
+        StructuredQuery<Entity> query = GqlQuery.entityQueryBuilder()
+                .kind("Match")
+                .build();
 
         try {
             dataStore.run(query).forEachRemaining(match -> {
@@ -69,9 +71,10 @@ public class DataStoreRepository implements VotesRepository {
     public void vote(int winner, int looser) {
         KeyFactory keyFactory = dataStore.newKeyFactory().kind("Match");
 
-        Key key = keyFactory.newKey(System.currentTimeMillis()); // TODO
+        Key key = dataStore.allocateId(keyFactory.newKey());
 
         Entity entity = Entity.builder(key)
+                .set("date", DateTime.now())
                 .set("winner", winner)
                 .set("looser", looser)
                 .build();
