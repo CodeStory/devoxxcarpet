@@ -7,7 +7,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Votes {
-    public static final int CARPET_COUNT = 10;
+    public static final int CARPET_COUNT = 12;
     private static final int START_SCORE = 1000;
 
     private final int[] playedPerIndex;

@@ -4,7 +4,7 @@ fs = require 'fs'
 coffee = require 'coffee-script'
 less = require 'less'
 
-CARPET_COUNT = 10
+CARPET_COUNT = 12
 playedPerIndex = (0 for i in [0...CARPET_COUNT])
 scorePerIndex = (1000 for i in [0...CARPET_COUNT])
 votesPerIndex = (0 for i in [0...CARPET_COUNT])
