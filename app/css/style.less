@@ -59,7 +59,6 @@ body {
     position: relative;
     width: 260px;
     margin: 0 auto;
-    .transition(opacity 1s);
 
     img {
       width: 250px;
@@ -126,35 +125,26 @@ body {
     margin-top: -50px;
   }
 
-  .rank0, .rank5 {
-    left: (40px + 140px * 0);
-  }
+  .generate-rank(0);
+  .generate-rank(1);
+  .generate-rank(2);
+  .generate-rank(3);
+  .generate-rank(4);
+  .generate-rank(5);
+  .generate-rank(6);
+  .generate-rank(7);
+  .generate-rank(8);
+  .generate-rank(9);
 
-  .rank1, .rank6 {
-    left: (40px + 140px * 1);
-  }
-
-  .rank2, .rank7 {
-    left: (40px + 140px * 2);
-  }
-
-  .rank3, .rank8 {
-    left: (40px + 140px * 3);
-  }
-
-  .rank4, .rank9 {
-    left: (40px + 140px * 4);
-  }
-
-  .rank5, .rank6, .rank7, .rank8, .rank9 {
-    top: 160px;
-  }
-
-  .rank0, .rank1, .rank2, .rank3, .rank4, .rank5, .rank6, .rank7, .rank8, .rank9 {
-    visibility: visible;
-
-    p {
+  .generate-rank(@index) {
+    .rank@{index} {
       visibility: visible;
+      left: (40px + 140px * mod(@index, 5));
+      top: 160px * floor(@index / 5);
+
+      p {
+        visibility: visible;
+      }
     }
   }
 
@@ -173,13 +163,6 @@ footer {
 }
 
 // Mixins
-
-.back(@url, @width, @height) {
-  width: @width;
-  height: @height;
-  background-image: url(@url);
-  background-size: @width @height;
-}
 
 .background-size(@type) {
   -webkit-background-size: @type;
