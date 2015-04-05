@@ -16,3 +16,4 @@ ADD . /home/devoxx
 
 RUN mvn verify dependency:copy-dependencies -DskipTests
 
+ENV DATASTORE false
