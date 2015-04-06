@@ -1,0 +1,22 @@
+<configuration>
+    <property name="LOGS_FILE" value="${LOGS_FILE:-target/devoxxcarpet.log}"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{HH:mm:ss} %-5level %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOGS_FILE}</file>
+
+        <encoder>
+            <pattern>%date{HH:mm:ss} %-5level %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
