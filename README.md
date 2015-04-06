@@ -1,4 +1,15 @@
-Run locally:
+Carpet Showdown is a very simple project that demonstrates the usage of Docker
+to deploy a web-app on the Google Cloud Platform.
+
+Thanks to Docker layer of abstraction, it's easy to deploy the same application
+on App Engine, Compute Engine or Container Engine.
+
+Each solution has its advantages. Most od the time they can even be combined.
+For instance, we'll use the App Engine's Cloud DataStore from all three.
+We will even demonstrate how to connect to the DataStore from another Cloud (heroku).
+
+
+Run the web-app locally:
 
 ```bash
 mvn verify dependency:copy-dependencies -DskipTests
