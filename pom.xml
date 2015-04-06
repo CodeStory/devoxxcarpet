@@ -73,4 +73,32 @@
             <version>v1beta2-rev1-2.1.2</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>precompile</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.3.2</version>
+                        <executions>
+                            <execution>
+                                <id>precompilation</id>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <phase>prepare-package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>net.codestory.http.misc.PreCompile</mainClass>
+                            <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
