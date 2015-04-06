@@ -28,9 +28,9 @@ public class DataStoreRepository implements VotesRepository {
 
     private Datastore createDataStore() {
         return DatastoreFactory.get().create(new DatastoreOptions.Builder()
-                .dataset("devoxxcarpet")
-                .credential(Authentication.get())
-                .build());
+            .dataset("devoxxcarpet")
+            .credential(Authentication.get())
+            .build());
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DataStoreRepository implements VotesRepository {
 
             cursor = batch.getEndCursor();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to connect read the votes", e);
         }
     }
 
@@ -67,20 +67,20 @@ public class DataStoreRepository implements VotesRepository {
             BeginTransactionResponse tres = dataStore.beginTransaction(BeginTransactionRequest.newBuilder().build());
 
             CommitRequest.Builder creq = CommitRequest
-                    .newBuilder()
-                    .setTransaction(tres.getTransaction());
+                .newBuilder()
+                .setTransaction(tres.getTransaction());
 
             creq.getMutationBuilder().addInsertAutoId(DatastoreV1.Entity
-                    .newBuilder()
-                    .setKey(makeKey("Match"))
-                    .addProperty(makeProperty("date", makeValue(new Date())))
-                    .addProperty(makeProperty("server", makeValue(serverId)))
-                    .addProperty(makeProperty("winner", makeValue(winner)))
-                    .addProperty(makeProperty("looser", makeValue(looser))));
+                .newBuilder()
+                .setKey(makeKey("Match"))
+                .addProperty(makeProperty("date", makeValue(new Date())))
+                .addProperty(makeProperty("server", makeValue(serverId)))
+                .addProperty(makeProperty("winner", makeValue(winner)))
+                .addProperty(makeProperty("looser", makeValue(looser))));
 
             dataStore.commit(creq.build());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to insert a vote", e);
         }
     }
 }
