@@ -39,6 +39,11 @@ docker $(docker-machine config carpet02) build -t dgageot/devoxxcarpet .
 docker $(docker-machine config carpet02) run --rm -ti -e DATASTORE=false -p 80:8080 dgageot/devoxxcarpet
 ```
 
+Create a docker machine with more scope:
+```bash
+docker-machine create --driver google --google-project devoxxcarpet --google-zone europe-west1-d --google-machine-type n1-standard-1 --google-scopes "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/datastore,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/cloud-platform" carpet03
+```
+
 Run node version:
 
 ```bash
