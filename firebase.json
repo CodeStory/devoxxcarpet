@@ -1,0 +1,11 @@
+{
+  "firebase": "popping-fire-1784",
+  "public": "app",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "docker/.*",
+    "target/.*"
+  ]
+}
