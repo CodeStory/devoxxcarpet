@@ -1,2 +1,8 @@
+carpet.iml
+.DS_Store
+.gcloud
+.git
+.idea
+.gitignore
 target
 README
