@@ -34,7 +34,7 @@ public class Votes {
             public void run() {
                 executor.execute(() -> votesRepository.refresh(Votes.this::computeVote));
             }
-        }, 1000, 1000);
+        }, 5000, 5000);
     }
 
     private VotesRepository createVotesRepository() {
