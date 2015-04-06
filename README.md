@@ -80,6 +80,17 @@ gcloud alpha container kubectl delete pod devoxxcarpet
 gcloud alpha container kubectl get pods
 ```
 
+Deploy on Heroku
+
+```bash
+heroku create
+heroku buildpack:set https://github.com/heroku/heroku-buildpack-java
+git push heroku master
+heroku ps:scale web=1
+heroku open
+heroku config:set DATASTORE=true
+```
+
 TODO:
 
  + Dockerfile switching
