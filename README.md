@@ -22,10 +22,10 @@ docker run --rm -ti -e DATASTORE=true dgageot/devoxxcarpet
 Run on GCE with docker machine:
 
 ```bash
-docker-machine create --driver google --google-project devoxxcarpet --google-zone europe-west1-d --google-machine-type n1-standard-1 carpet01
-docker $(docker-machine config carpet01) ps
-docker $(docker-machine config carpet01) build -t dgageot/devoxxcarpet .
-docker $(docker-machine config carpet01) run --rm -ti -e DATASTORE=false -p 80:8080 dgageot/devoxxcarpet
+docker-machine create --driver google --google-project devoxxcarpet --google-zone europe-west1-d --google-machine-type n1-standard-1 carpet02
+docker $(docker-machine config carpet02) ps
+docker $(docker-machine config carpet02) build -t dgageot/devoxxcarpet .
+docker $(docker-machine config carpet02) run --rm -ti -e DATASTORE=false -p 80:8080 dgageot/devoxxcarpet
 ```
 
 Run node version:
