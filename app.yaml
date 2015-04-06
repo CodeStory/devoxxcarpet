@@ -8,9 +8,9 @@ manual_scaling:
 
 handlers:
 
-- url: /(.*\.(gif|png|jpg))$
+- url: /(.*\.(gif|png|jpg|woff|map))$
   static_files: app/\1
-  upload: app/.*\.(gif|png|jpg)$
+  upload: app/.*\.(gif|png|jpg|woff|map)$
 
 - url: /
   static_files: app/index.html
