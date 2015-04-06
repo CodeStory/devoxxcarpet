@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodeStory - Carpet Showdown</title>
+
+    <link rel="icon" type="image/png" href="/img/favicon.png"/>
+    <link rel="apple-touch-icon" href="/img/favicon.png"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body ng-app="app">
+
+<div id="title">
+    <span>Carpet Showdown</span>
+</div>
+
+<div id="main" ng-controller="HomeController as home">
+    <div class="vote" id="vote1">
+        <div class="image" ng-click="home.preferFirst()">
+            <a href="#">
+                <img class="img-thumbnail" ng-src="/img/carpet{{home.left}}.jpg"/>
+            </a>
+            <button>I prefer this one!</button>
+        </div>
+    </div>
+
+    <div class="vote" id="vote2">
+        <div class="image" ng-click="home.preferSecond()">
+            <a href="#">
+                <img class="img-thumbnail" ng-src="/img/carpet{{home.right}}.jpg"/>
+            </a>
+            <button>I prefer that one!</button>
+        </div>
+    </div>
+
+    <div id="top">
+        <div>
+            <div class="rank rank{{home.top[i].rank}}" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10,11]">
+                <img class="img-thumbnail" ng-src="/img/small{{i}}.jpg"/>
+
+                <p class="rank">#{{home.top[i].rank + 1}}</p>
+
+                <p class="votes">
+                    <ng-pluralize count="home.top[i].carpet.votes"
+                                  when="{'0': 'no vote', 'one': '{} vote', 'other': '{} votes'}"></ng-pluralize>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; CodeStory 1987</p>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+<script src="/js/nobackend.js"></script>
+[[script 'livereload']]
+
+</body>
+</html>
