@@ -49,6 +49,14 @@ npm install
 gcloud preview app deploy .
 ```
 
+Push docker image in Google Container registry
+
+```bash
+docker build -t dgageot/devoxxcarpet .
+docker tag dgageot/devoxxcarpet gcr.io/devoxxcarpet/java
+gcloud preview docker push gcr.io/devoxxcarpet/java
+```
+
 TODO:
 
  + Dockerfile switching
