@@ -12,7 +12,7 @@ We will even demonstrate how to connect to the DataStore from another Cloud (her
 Run the web-app locally:
 
 ```bash
-mvn verify dependency:copy-dependencies -DskipTests
+mvn clean verify -DskipTests
 java -DPROD_MODE=true -jar target/carpet.jar
 ```
 
@@ -26,8 +26,7 @@ docker run --rm -ti -p 8080:8080 dgageot/devoxxcarpet
 Run locally with Docker using the CloudDataStore:
 
 ```bash
-docker build -t dgageot/devoxxcarpet .
-docker run --rm -ti -e DATASTORE=true dgageot/devoxxcarpet
+docker run --rm -ti -e DATASTORE=true -p 8080:8080 dgageot/devoxxcarpet
 ```
 
 Run on GCE with docker machine:
@@ -48,7 +47,7 @@ Run node version:
 
 ```bash
 npm install
-node server.js
+npm start
 ```
 
 Run node version with appengine dev mode:
@@ -61,19 +60,25 @@ gcloud preview app run .
 Deploy node version on App Engine Managed Vms:
 
 ```bash
+mv Dockerfile Dockerfile.java
+mv Dockerfile.node Dockerfile
+
 npm install
 gcloud preview app deploy .
+
+mv Dockerfile Dockerfile.node
+mv Dockerfile.java Dockerfile
 ```
 
 Push docker image in Google Container registry
 
 ```bash
 docker build -t dgageot/devoxxcarpet .
-docker tag dgageot/devoxxcarpet gcr.io/devoxxcarpet/java
+docker tag -f dgageot/devoxxcarpet gcr.io/devoxxcarpet/java
 gcloud preview docker push gcr.io/devoxxcarpet/java
 ```
 
-Deploy pod on Kubernetes
+Deploy on Kubernetes
 
 ```bash
 cd kube
@@ -98,15 +103,14 @@ gcloud alpha container kubectl get pods
 
 Deploy on Heroku
 
+(Don't forget to commit the private key before pushing to Heroku.
+
 ```bash
 heroku create
 heroku buildpack:set https://github.com/heroku/heroku-buildpack-java
 git push heroku master
 heroku ps:scale web=1
 heroku open
+
 heroku config:set DATASTORE=true
 ```
-
-TODO:
-
- + Dockerfile switching
