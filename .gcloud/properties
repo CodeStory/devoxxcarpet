@@ -1,2 +1,9 @@
 [core]
 project = devoxxcarpet
+
+[container]
+cluster = cluster
+
+[compute]
+zone = us-central1-f
+

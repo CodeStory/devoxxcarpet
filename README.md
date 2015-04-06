@@ -57,6 +57,29 @@ docker tag dgageot/devoxxcarpet gcr.io/devoxxcarpet/java
 gcloud preview docker push gcr.io/devoxxcarpet/java
 ```
 
+Deploy pod on Kubernetes
+
+```bash
+cd kube
+
+gcloud alpha container kubectl create -f web-controller.json
+gcloud alpha container kubectl get pods
+
+gcloud alpha container kubectl create -f web-service.json
+gcloud alpha container kubectl get services
+
+gcloud compute firewall-rules create devoxxcarpet-80 --allow=tcp:80 --target-tags k8s-cluster-node
+
+gcloud alpha container kubectl resize --replicas=2 rc web-controller
+```
+
+Cleanup Kubernetes Cluster
+
+```bash
+gcloud alpha container kubectl delete pod devoxxcarpet
+gcloud alpha container kubectl get pods
+```
+
 TODO:
 
  + Dockerfile switching
