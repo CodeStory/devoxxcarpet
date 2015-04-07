@@ -1,5 +1,9 @@
 app = angular.module 'app', []
 
+.service 'Version', ($http) ->
+	get: ->
+    $http.get "/version"
+
 .service 'Votes', ($http) ->
   match: ->
     $http.get "/carpets/match", cache: false
@@ -9,8 +13,13 @@ app = angular.module 'app', []
     $http.post "/votes/#{winner}/#{looser}"
 
 .controller 'HomeController', class
-  constructor: (@$timeout, @Votes) ->
+  constructor: (@$timeout, @Votes, @Version) ->
     @refresh()
+    @updateVersion()
+
+  updateVersion: ->
+    @Version.get().success (data) =>
+      @version = data
 
   preferFirst: ->
     @Votes.vote(@left.index, @right.index).success =>

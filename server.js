@@ -63,6 +63,11 @@
     return process.exit();
   });
 
+  app.get('/version', function(req, res) {
+    res.set('Content-Type', 'text/plain');
+    return res.send("Node");
+  });
+
   app.get('/carpets/match', function(req, res) {
     var carpets, left, right, _ref;
     while (left === right) {

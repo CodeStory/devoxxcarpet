@@ -7,6 +7,7 @@ public class MainServer {
         new WebServer().configure(routes -> routes
                 .add(CarpetsResource.class)
                 .add(VoteResource.class)
+                .get("/version", "Java")
                 .get("/_ah/start", "OK")
                 .get("/_ah/stop", "OK")
                 .get("/_ah/health", "OK"))
