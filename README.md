@@ -43,6 +43,13 @@ Create a docker machine with more scope:
 docker-machine create --driver google --google-project devoxxcarpet --google-zone europe-west1-d --google-machine-type n1-standard-1 --google-scopes "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/datastore,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/cloud-platform" carpet03
 ```
 
+Deploy on App Engine Managed Vms:
+
+```bash
+gcloud preview app modules delete default --version java
+gcloud preview app deploy --version=java .
+```
+
 Run node version:
 
 ```bash
@@ -64,7 +71,8 @@ mv Dockerfile Dockerfile.java
 mv Dockerfile.node Dockerfile
 
 npm install
-gcloud preview app deploy .
+gcloud preview app modules delete default --version node
+gcloud preview app deploy --version=node .
 
 mv Dockerfile Dockerfile.node
 mv Dockerfile.java Dockerfile
