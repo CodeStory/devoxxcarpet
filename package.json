@@ -11,6 +11,6 @@
     "less": "2.5.0"
   },
   "scripts": {
-    "start": "coffee server.coffee"
+    "start": "node server.js"
   }
 }
