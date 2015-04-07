@@ -27,6 +27,10 @@ app.get '/_ah/stop', (req, res) ->
   res.send(200, 'ok')
   process.exit()
 
+app.get '/version', (req, res) ->
+  res.set('Content-Type', 'text/plain')
+  res.send("Node")
+
 app.get '/carpets/match', (req, res) ->
   [left, right] = [Math.floor(Math.random() * CARPET_COUNT), Math.floor(Math.random() * CARPET_COUNT)] while (left is right)
 
