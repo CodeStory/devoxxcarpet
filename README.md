@@ -1,7 +1,6 @@
 # TODO
 
 - Simplify webapp
-- Use webjars
 - Try to use latest datastore Api
 - Restore warmup Docker build?
 - ...

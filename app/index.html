@@ -6,8 +6,6 @@
 
     <link rel="icon" type="image/png" href="/img/favicon.png"/>
     <link rel="apple-touch-icon" href="/img/favicon.png"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body ng-app="app" ng-controller="HomeController as home">
@@ -55,8 +53,9 @@
     <p>&copy; CodeStory 1987</p>
 </footer>
 
-<script src="/js/angular.js"></script>
-<script src="/js/controllers.js"></script>
-
+[[webjar 'bootstrap.css']]
+[[css 'style']]
+[[webjar 'angular.js']]
+[[script 'controllers']]
 </body>
 </html>
