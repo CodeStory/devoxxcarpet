@@ -1,3 +1,27 @@
+# TODO
+
+- Simplify webapp
+- Use webjars
+- Try to use latest datastore Api
+- Restore warmup Docker build?
+- ...
+
+# Prepare Demos
+
+- Local
+- Docker
+- Managed VMS
+- Logs -> BigQuery
+- Live debug
+- Kubernetes, lots of nodes with load balancing
+- Connect to a different backend
+- Firebase backend deployed on CDN
+
+# Possible
+
+- Kubernetes: show what's going on with firebase bridge
+- Auto scaling
+
 # Google Cloud Platform University
 
 Carpet Showdown is a very simple project that demonstrates the usage of Docker
