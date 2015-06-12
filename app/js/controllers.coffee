@@ -15,11 +15,6 @@ app = angular.module 'app', []
 .controller 'HomeController', class
   constructor: (@$timeout, @Votes, @Version) ->
     @refresh()
-    @updateVersion()
-
-  updateVersion: ->
-    @Version.get().success (data) =>
-      @version = data
 
   preferFirst: ->
     @Votes.vote(@left.index, @right.index).success =>

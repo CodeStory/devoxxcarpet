@@ -1,1 +1,0 @@
-web: java -DPROD_MODE=true -jar target/carpet.jar

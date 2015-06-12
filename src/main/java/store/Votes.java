@@ -38,11 +38,11 @@ public class Votes {
     }
 
     private VotesRepository createVotesRepository() {
-        if ("true".equals(System.getenv("DATASTORE"))) {
-            return new DataStoreRepository();
-        } else {
+//        if ("true".equals(System.getenv("DATASTORE"))) {
+//            return new DataStoreRepository();
+//        } else {
             return new InMemoryRepository();
-        }
+//        }
     }
 
     public void vote(int winner, int looser) {
