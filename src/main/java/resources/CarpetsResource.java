@@ -1,12 +1,14 @@
-package main;
+package resources;
 
 import model.Carpet;
-import model.RankedCarpet;
 import net.codestory.http.annotations.Get;
 import net.codestory.http.annotations.Prefix;
 import store.Votes;
 
-import java.util.*;
+import java.util.Random;
+
+import static java.util.stream.IntStream.range;
+import static store.Votes.CARPET_COUNT;
 
 @Prefix("/carpets")
 public class CarpetsResource {
@@ -16,6 +18,11 @@ public class CarpetsResource {
     public CarpetsResource(Random random, Votes votes) {
         this.random = random;
         this.votes = votes;
+    }
+
+    @Get("")
+    public Carpet[] carpets() {
+        return range(0, CARPET_COUNT).mapToObj(this::carpet).toArray(Carpet[]::new);
     }
 
     @Get("match")
@@ -30,25 +37,8 @@ public class CarpetsResource {
         return new Carpet[]{carpet(first), carpet(second)};
     }
 
-    @Get("top")
-    public Map<Integer, RankedCarpet> top() {
-        List<Carpet> all = new ArrayList<>();
-        for (int i = 0; i < Votes.CARPET_COUNT; i++) {
-            all.add(carpet(i));
-        }
-
-        Collections.sort(all, (l, r) -> r.score - l.score);
-
-        Map<Integer, RankedCarpet> ranked = new LinkedHashMap<>();
-        int rank = 0;
-        for (Carpet carpet : all) {
-            ranked.put(carpet.index, new RankedCarpet(rank++, carpet));
-        }
-        return ranked;
-    }
-
     private int randomIndex() {
-        return random.nextInt(Votes.CARPET_COUNT);
+        return random.nextInt(CARPET_COUNT);
     }
 
     private Carpet carpet(int index) {

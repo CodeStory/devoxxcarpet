@@ -1,19 +1,15 @@
 app = angular.module 'app', []
 
-.service 'Version', ($http) ->
-	get: ->
-    $http.get "/version"
-
 .service 'Votes', ($http) ->
   match: ->
     $http.get "/carpets/match", cache: false
-  top: ->
-    $http.get "/carpets/top", cache: false
+  carpets: ->
+    $http.get "/carpets", cache: false
   vote: (winner, looser) ->
     $http.post "/votes/#{winner}/#{looser}"
 
 .controller 'HomeController', class
-  constructor: (@$timeout, @Votes, @Version) ->
+  constructor: (@Votes) ->
     @refresh()
 
   preferFirst: ->
@@ -28,5 +24,7 @@ app = angular.module 'app', []
     @Votes.match().success (data) =>
       [@left, @right] = data
 
-    @Votes.top().success (data) =>
-      @top = data
+    @Votes.carpets().success (carpets) =>
+      carpets.sort (l, r) -> r.score - l.score
+      carpet.rank = i for carpet,i in carpets
+      @top = carpets

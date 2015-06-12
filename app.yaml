@@ -17,7 +17,3 @@ handlers:
 
 - url: .*
   script: dynamic
-
-- url: /app.js
-  script: app.js
-  login: required

@@ -1,5 +1,5 @@
-package main;
-
+import resources.CarpetsResource;
+import resources.VoteResource;
 import net.codestory.http.WebServer;
 
 public class MainServer {

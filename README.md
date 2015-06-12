@@ -1,6 +1,5 @@
 # TODO
 
-- Simplify webapp
 - Try to use latest datastore Api
 - Restore warmup Docker build?
 - ...

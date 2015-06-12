@@ -1,41 +1,28 @@
 @white: #FFFFFF;
 @black: #000000;
-@gray: #EEEEEE;
-@star_size: 64px;
 
 @font-face {
   font-family: 'Nosifer';
   font-style: normal;
   font-weight: 400;
-  src: local('Nosifer'), local('Nosifer-Regular'), url('/fonts/nosifer.woff') format('woff');
+  src: local('Nosifer'), local('Nosifer-Regular'), url('fonts/nosifer.woff') format('woff');
 }
 
 body {
-  background: url('/img/back.jpg') no-repeat center center fixed;
+  background: url('img/back.jpg') no-repeat center center fixed;
   .background-size(cover);
 }
 
 #title {
-  width: 100%;
+  width: 900px;
+  height: 126px;
   font-family: 'Nosifer', cursive;
   color: #660000;
-  text-shadow: 2px 2px #ff0000;
+  text-shadow: 2px 2px @white;
   text-align: center;
-  height: 126px;
-
-  span {
-    font-size: 5em;
-    line-height: 1em;
-    display: block;
-    width: 900px;
-    margin: 0 auto;
-  }
-
-  em {
-    color: white;
-    font-size: 20px;
-    line-height: 20px;
-  }
+  font-size: 5em;
+  line-height: 1em;
+  margin: 0 auto;
 }
 
 #main {
@@ -45,19 +32,8 @@ body {
   margin: 40px auto 0 auto;
 }
 
-#vote1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#vote2 {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
 .vote {
+  position: absolute;
   height: 333px;
   text-align: center;
 
@@ -87,6 +63,14 @@ body {
       background-color: @black;
     }
   }
+}
+
+#vote1 {
+  left: 0;
+}
+
+#vote2 {
+  right: 0;
 }
 
 #top {
@@ -180,12 +164,6 @@ footer {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-}
-
-.transition(@arg1) {
-  -webkit-transition: @arg1;
-  -moz-transition: @arg1;
-  transition: @arg1;
 }
 
 .transition(@arg1, @arg2, @arg3, @arg4) {
