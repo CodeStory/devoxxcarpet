@@ -28,11 +28,28 @@ docker build -t dgageot/devoxxcarpet .
 docker run --rm -ti -p 8080:8080 dgageot/devoxxcarpet
 ```
 
-Run locally with Docker using the CloudDataStore:
+## Run locally with Docker using the CloudDataStore:
 
 ```bash
 docker run --rm -ti -e DATASTORE=true -p 8080:8080 dgageot/devoxxcarpet
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Run on GCE with docker machine:
 

@@ -28,7 +28,7 @@ public class DataStoreRepository implements VotesRepository {
 
     private Datastore createDataStore() {
         return DatastoreFactory.get().create(new DatastoreOptions.Builder()
-            .dataset("devoxxcarpet")
+            .dataset("code-story-blog")
             .credential(Authentication.get())
             .build());
     }
