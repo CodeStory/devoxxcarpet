@@ -8,6 +8,10 @@
     <artifactId>carpet</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
@@ -17,6 +21,51 @@
 
     <build>
         <finalName>carpet</finalName>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.6.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.4</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
         <plugins>
             <plugin>
@@ -82,7 +131,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.3.2</version>
+                        <version>1.4.0</version>
                         <executions>
                             <execution>
                                 <id>precompilation</id>

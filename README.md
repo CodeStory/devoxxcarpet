@@ -11,41 +11,17 @@ For instance, we'll use the App Engine's Cloud DataStore from all three.
 
 ## Run the web-app locally:
 
-We are going to work on a simple web-app. Because we'd like to write code and test our application faster, we're going to make sure it can be started out of the box.
+We are going to work on a simple web-app. Because we'd like to write code and test our application faster, we're going
+to make sure it can be started out of the box like a standard java application.
 
 ```bash
 mvn clean verify -DskipTests
 java -DPROD_MODE=true -jar target/carpet.jar
 ```
 
+## Run locally with Docker:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Run locally with Docker:
+Packaging our application with Docker will make it easier to deploy anywhere.
 
 ```bash
 docker build -t dgageot/devoxxcarpet .
