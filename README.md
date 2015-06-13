@@ -56,36 +56,38 @@ docker run --rm -ti -p 8080:8080 dgageot/devoxxcarpet
 docker run --rm -ti -e DATASTORE=true -p 8080:8080 dgageot/devoxxcarpet
 ```
 
+## Run on GCE (Google Compute Engine) with docker-machine:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Run on GCE with docker machine:
+Docker machine makes it easy to create a remote server with Docker pre-installed.
 
 ```bash
-docker-machine create --driver google --google-project devoxxcarpet --google-zone europe-west1-d --google-machine-type n1-standard-1 carpet02
+docker-machine create --driver google --google-project code-story-blog --google-zone europe-west1-d --google-machine-type n1-standard-1 carpet02
+
+docker-machine config carpet02
 docker $(docker-machine config carpet02) ps
 docker $(docker-machine config carpet02) build -t dgageot/devoxxcarpet .
 docker $(docker-machine config carpet02) run --rm -ti -e DATASTORE=false -p 80:8080 dgageot/devoxxcarpet
 ```
 
-Create a docker machine with more scope:
+One can create a docker machine with more scope:
+
 ```bash
-docker-machine create --driver google --google-project devoxxcarpet --google-zone europe-west1-d --google-machine-type n1-standard-1 --google-scopes "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/datastore,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/cloud-platform" carpet03
+docker-machine create --driver google --google-project code-story-blog --google-zone europe-west1-d --google-machine-type n1-standard-1 --google-scopes "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/datastore,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/cloud-platform" carpet03
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Deploy on App Engine Managed Vms:
 
