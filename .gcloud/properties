@@ -2,7 +2,8 @@
 project = code-story-blog
 
 [container]
-cluster = cluster
+cluster = devoxx
 
 [compute]
 zone = europe-west1-d
+

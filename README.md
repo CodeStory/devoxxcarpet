@@ -82,15 +82,31 @@ registry hosted on Google Cloud Platform without any configuration.
 
 ```bash
 docker build -t dgageot/devoxxcarpet .
-docker tag -f dgageot/devoxxcarpet gcr.io/devoxxcarpet/java
-gcloud preview docker push gcr.io/devoxxcarpet/java
+docker tag -f dgageot/devoxxcarpet gcr.io/code-story-blog/devoxxcarpet
+gcloud preview docker push gcr.io/code-story-blog/devoxxcarpet
 ```
 
+## Deploy on Kubernetes
 
+```bash
+gcloud alpha container get-credentials
 
+kubectl create -f cluster/service.yaml
+kubectl create -f cluster/pod.yaml
 
+kubectl get services,pods
 
+gcloud compute forwarding-rules list
 
+kubectl scale --replicas=4 rc pod-carpet
+```
+
+### Cleanup Kubernetes Cluster
+
+```bash
+kubectl delete -f cluster/pod.yaml
+kubectl delete -f cluster/service.yaml
+```
 
 
 
@@ -105,27 +121,4 @@ Deploy on App Engine Managed Vms:
 ```bash
 gcloud preview app modules delete default --version java
 gcloud preview app deploy --version=java .
-```
-
-Deploy on Kubernetes
-
-```bash
-cd kube
-
-gcloud alpha container kubectl create -f web-controller.json
-gcloud alpha container kubectl get pods
-
-gcloud alpha container kubectl create -f web-service.json
-gcloud alpha container kubectl get services
-
-gcloud compute firewall-rules create devoxxcarpet-80 --allow=tcp:80 --target-tags k8s-cluster-node
-
-gcloud alpha container kubectl resize --replicas=2 rc web-controller
-```
-
-Cleanup Kubernetes Cluster
-
-```bash
-gcloud alpha container kubectl delete pod devoxxcarpet
-gcloud alpha container kubectl get pods
 ```

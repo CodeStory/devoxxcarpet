@@ -6,5 +6,5 @@ carpet.iml
 .gitignore
 target
 README.md
-kube
+cluster
 Dockerfile

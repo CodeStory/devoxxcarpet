@@ -1,0 +1,11 @@
+apiVersion: v1beta3
+kind: Service
+metadata:
+  name: service-carpet
+spec:
+  type: "LoadBalancer"
+  selector:
+    carpet: "devoxxUK"
+  ports:
+  - port: 80
+    targetPort: 8080

@@ -1,0 +1,22 @@
+apiVersion: v1beta3
+kind: ReplicationController
+metadata:
+  name: pod-carpet
+  labels:
+    carpet: "devoxxUK"
+spec:
+  replicas: 1
+  selector:
+    carpet: "devoxxUK"
+  template:
+    metadata:
+      labels:
+        carpet: "devoxxUK"
+    spec:
+      containers:
+      - image: gcr.io/code-story-blog/devoxxcarpet
+        name: carpet
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DATASTORE
+          value: "true"
