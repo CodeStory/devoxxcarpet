@@ -75,6 +75,17 @@ One can create a docker machine with more scope:
 docker-machine create --driver google --google-project code-story-blog --google-zone europe-west1-d --google-machine-type n1-standard-1 --google-scopes "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/datastore,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/cloud-platform" carpet03
 ```
 
+## Push docker image into Google Container registry
+
+Instead of relying on a public Docker registry, one can have it's private
+registry hosted on Google Cloud Platform without any configuration.
+
+```bash
+docker build -t dgageot/devoxxcarpet .
+docker tag -f dgageot/devoxxcarpet gcr.io/devoxxcarpet/java
+gcloud preview docker push gcr.io/devoxxcarpet/java
+```
+
 
 
 
@@ -94,42 +105,6 @@ Deploy on App Engine Managed Vms:
 ```bash
 gcloud preview app modules delete default --version java
 gcloud preview app deploy --version=java .
-```
-
-Run node version:
-
-```bash
-npm install
-npm start
-```
-
-Run node version with appengine dev mode:
-
-```bash
-npm install
-gcloud preview app run .
-```
-
-Deploy node version on App Engine Managed Vms:
-
-```bash
-mv Dockerfile Dockerfile.java
-mv Dockerfile.node Dockerfile
-
-npm install
-gcloud preview app modules delete default --version node
-gcloud preview app deploy --version=node .
-
-mv Dockerfile Dockerfile.node
-mv Dockerfile.java Dockerfile
-```
-
-Push docker image in Google Container registry
-
-```bash
-docker build -t dgageot/devoxxcarpet .
-docker tag -f dgageot/devoxxcarpet gcr.io/devoxxcarpet/java
-gcloud preview docker push gcr.io/devoxxcarpet/java
 ```
 
 Deploy on Kubernetes
@@ -153,18 +128,4 @@ Cleanup Kubernetes Cluster
 ```bash
 gcloud alpha container kubectl delete pod devoxxcarpet
 gcloud alpha container kubectl get pods
-```
-
-Deploy on Heroku
-
-(Don't forget to commit the private key before pushing to Heroku.
-
-```bash
-heroku create
-heroku buildpack:set https://github.com/heroku/heroku-buildpack-java
-git push heroku master
-heroku ps:scale web=1
-heroku open
-
-heroku config:set DATASTORE=true
 ```
