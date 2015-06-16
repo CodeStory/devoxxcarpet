@@ -1,6 +1,5 @@
 # TODO
 
-- Managed VMS
 - Logs -> BigQuery
 - Live debug
 - Firebase backend deployed on CDN
