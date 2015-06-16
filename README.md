@@ -1,6 +1,5 @@
 # TODO
 
-- Logs -> BigQuery
 - Live debug
 - Firebase backend deployed on CDN
 - Kubernetes: show what's going on with firebase bridge
