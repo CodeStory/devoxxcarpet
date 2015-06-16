@@ -1,6 +1,5 @@
 # TODO
 
-- Firebase backend deployed on CDN
 - Kubernetes: show what's going on with firebase bridge
 
 # Google Cloud Platform University
