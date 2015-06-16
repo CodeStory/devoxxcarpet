@@ -1,13 +1,5 @@
 # TODO
 
-- Try to use latest datastore Api
-- Restore warmup Docker build?
-- ...
-
-# Prepare Demos
-
-- Local
-- Docker
 - Managed VMS
 - Logs -> BigQuery
 - Live debug
