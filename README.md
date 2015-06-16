@@ -1,6 +1,5 @@
 # TODO
 
-- Live debug
 - Firebase backend deployed on CDN
 - Kubernetes: show what's going on with firebase bridge
 
@@ -100,4 +99,11 @@ Then really deploy the application.
 
 ```bash
 gcloud --verbosity debug preview app deploy app.yaml
+```
+
+## Live debug
+
+```bash
+gcloud preview app modules delete default --version java
+gcloud --verbosity debug preview app deploy --version=java app.yaml
 ```
