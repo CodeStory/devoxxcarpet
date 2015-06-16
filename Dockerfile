@@ -2,6 +2,7 @@ FROM maven:3.3.3-jdk-8
 MAINTAINER David Gageot <david@gageot.net>
 
 WORKDIR /home/devoxx
+ENV DATASTORE true
 ENTRYPOINT ["./start.sh"]
 EXPOSE 8080
 

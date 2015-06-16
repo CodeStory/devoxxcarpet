@@ -1,9 +1,8 @@
 [core]
-project = code-story-blog
+project = devoxx-carpet-uk
 
 [container]
-cluster = devoxx
+cluster = carpet
 
 [compute]
 zone = europe-west1-d
-
