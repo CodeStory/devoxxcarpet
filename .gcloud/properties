@@ -1,5 +1,6 @@
 [core]
-project = devoxx-carpet-uk
+project = carpet-devoxx-uk
+account = dgageot@gmail.com
 
 [container]
 cluster = carpet

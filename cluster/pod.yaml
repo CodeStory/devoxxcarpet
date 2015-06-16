@@ -14,7 +14,7 @@ spec:
         carpet: "devoxxUK"
     spec:
       containers:
-      - image: gcr.io/devoxx-carpet-uk/devoxxcarpet
+      - image: gcr.io/carpet-devoxx-uk/devoxxcarpet
         name: carpet
         imagePullPolicy: IfNotPresent
         env:

@@ -17,7 +17,7 @@ public class Votes {
     private final Executor executor;
 
     public Votes() {
-        this.votesRepository = createVotesRepository();
+        this.votesRepository = new VotesRepository();
         this.playedPerIndex = new int[CARPET_COUNT];
         this.scorePerIndex = new int[CARPET_COUNT];
         this.votesPerIndex = new int[CARPET_COUNT];
@@ -35,14 +35,6 @@ public class Votes {
                 executor.execute(() -> votesRepository.refresh(Votes.this::computeVote));
             }
         }, 5000, 5000);
-    }
-
-    private VotesRepository createVotesRepository() {
-        if ("true".equals(System.getenv("DATASTORE"))) {
-            return new DataStoreRepository();
-        } else {
-            return new InMemoryRepository();
-        }
     }
 
     public void vote(int winner, int looser) {

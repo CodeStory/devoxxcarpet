@@ -3,14 +3,8 @@
 - Managed VMS
 - Logs -> BigQuery
 - Live debug
-- Kubernetes, lots of nodes with load balancing
-- Connect to a different backend
 - Firebase backend deployed on CDN
-
-# Possible
-
 - Kubernetes: show what's going on with firebase bridge
-- Auto scaling
 
 # Google Cloud Platform University
 
@@ -47,7 +41,7 @@ docker run --rm -ti -p 8080:8080 dgageot/devoxxcarpet
 Docker machine makes it easy to create a remote server with Docker pre-installed.
 
 ```bash
-docker-machine create --driver google --google-project devoxx-carpet-uk --google-zone europe-west1-d --google-machine-type n1-standard-1 carpet02
+docker-machine create --driver google --google-project carpet-devoxx-uk --google-zone europe-west1-d --google-machine-type n1-standard-1 carpet02
 
 docker-machine config carpet02
 docker $(docker-machine config carpet02) ps
@@ -62,8 +56,8 @@ registry hosted on Google Cloud Platform without any configuration.
 
 ```bash
 docker build -t dgageot/devoxxcarpet .
-docker tag -f dgageot/devoxxcarpet gcr.io/devoxx-carpet-uk/devoxxcarpet
-gcloud preview docker push gcr.io/devoxx-carpet-uk/devoxxcarpet
+docker tag -f dgageot/devoxxcarpet gcr.io/carpet-devoxx-uk/devoxxcarpet
+gcloud preview docker push gcr.io/carpet-devoxx-uk/devoxxcarpet
 ```
 
 ## Deploy on Kubernetes
@@ -78,8 +72,15 @@ kubectl get services,pods
 
 gcloud compute forwarding-rules list
 gcloud compute firewall-rules create --allow=tcp:80 --target-tags=k8s-carpet-node k8s-carpet-node-80
+```
 
+Take a look at the logs.
+
+### Start more nodes
+
+```bash
 kubectl scale --replicas=4 rc pod-carpet
+kubectl get pods
 ```
 
 ### Cleanup Kubernetes Cluster
