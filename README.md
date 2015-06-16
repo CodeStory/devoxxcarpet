@@ -6,9 +6,6 @@
 - Kubernetes, lots of nodes with load balancing
 - Connect to a different backend
 - Firebase backend deployed on CDN
-- Use docker machine to configure an existing server
-- Quick Go demo
-- Restore the build cache for Demos
 
 # Possible
 
