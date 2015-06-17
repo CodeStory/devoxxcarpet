@@ -16,7 +16,6 @@ spec:
       containers:
       - image: gcr.io/carpet-devoxx-uk/devoxxcarpet
         name: carpet
-        imagePullPolicy: IfNotPresent
         env:
         - name: DATASTORE
           value: "true"
