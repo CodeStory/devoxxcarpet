@@ -18,7 +18,19 @@
 + Smoother (bulletproof) debugger
 + Firebase native js/css or grunt?
 + Show cdn map
++ Demonstrate multiple containers on local machine???
 
+
+# Questions
+
++ Should we target java developers?
++ How to make it more fun?
++ 
+
+
+# Fun
+
++ Quine relay on Kubernetes
 
 
 
