@@ -16,7 +16,7 @@ test our application faster, we're going to make sure it can be started out of
 the box like a standard java application.
 
 ```bash
-mvn clean install
+mvn clean verify
 java -jar target/carpet.jar
 ```
 
