@@ -16,6 +16,3 @@ spec:
       containers:
       - image: gcr.io/carpet-devoxx-uk/devoxxcarpet
         name: carpet
-        env:
-        - name: DATASTORE
-          value: "true"
