@@ -19,32 +19,19 @@
 + Firebase native js/css or grunt?
 + Show cdn map
 + Demonstrate multiple containers on local machine???
++ Talk about the blurry lines between IAAS and PAAS
 
 
 # Questions
 
 + Should we target java developers?
 + How to make it more fun?
-+ 
-
 
 # Fun
 
 + Quine relay on Kubernetes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
++ Launch many times the same container to show that Docker makes it possible
+  to simulate a cluster locally
 
 
 # Google Cloud Platform University
