@@ -26,6 +26,7 @@
 
 + Should we target java developers?
 + How to make it more fun?
++ How to generate logs from a docker-machine?
 
 # Fun
 
@@ -137,6 +138,5 @@ gcloud --verbosity debug preview app deploy app.yaml
 ## Live debug
 
 ```bash
-gcloud preview app modules delete default --version java
-gcloud --verbosity debug preview app deploy --version=java app.yaml
+gcloud --verbosity debug preview app deploy app.yaml
 ```
