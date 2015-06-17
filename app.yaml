@@ -7,9 +7,9 @@ manual_scaling:
 
 handlers:
 
-- url: /(.*\.(gif|png|jpg|woff|map))$
+- url: /(.*\.(png|jpg|woff))$
   static_files: app/\1
-  upload: app/.*\.(gif|png|jpg|woff|map)$
+  upload: app/.*\.(png|jpg|woff)$
 
 - url: .*
   script: dynamic

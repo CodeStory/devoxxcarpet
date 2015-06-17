@@ -8,9 +8,15 @@
   src: local('Nosifer'), local('Nosifer-Regular'), url('fonts/nosifer.woff') format('woff');
 }
 
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: url('img/back.jpg') no-repeat center center fixed;
   .background-size(cover);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #title {
@@ -50,13 +56,13 @@ body {
 
     button {
       position: absolute;
-      top: 150px;
-      left: 70px;
+      top: 240px;
+      left: 50px;
       background-color: rgba(0, 0, 0, 0.6);
-      border: none;
       color: @white;
       .round(5px);
       outline: none;
+      font-size: larger;
     }
 
     button:hover {
@@ -142,6 +148,11 @@ body {
     width: 100px;
     height: 134px;
   }
+}
+
+.img-thumbnail {
+  border: solid white 5px;
+  border-radius: 2px;
 }
 
 footer {

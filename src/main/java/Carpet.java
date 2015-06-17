@@ -1,5 +1,3 @@
-package model;
-
 public class Carpet {
     public final int index;
     public final int score;
