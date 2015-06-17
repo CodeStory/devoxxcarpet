@@ -1,10 +1,19 @@
 #!/bin/bash
 
-wget -q https://storage.googleapis.com/cloud-debugger/compute-java/format_env_gce.sh ; \
-  chmod +x ./format_env_gce.sh
+#GAE_LONG_APP_ID=carpet-devoxx-uk
+#GAE_MODULE_VERSION=20150617t182912
 
-CDBG_ARGS="$( ./format_env_gce.sh --app_class_path=target --version=java )"
+if [ ! -z "$GAE_MODULE_NAME" ]; then
+  echo "Running inside GAE ($GAE_PARTITION)."
 
-echo ${CDBG_ARGS}
+  if [ ! "$GAE_PARTITION" == "dev" ]; then
+    echo "Production mode. Setup Debugger agent."
 
-exec java ${CDBG_ARGS} -DPROD_MODE=true -Xmx2G -jar target/carpet.jar
+    wget -q https://storage.googleapis.com/cloud-debugger/compute-java/format_env_gce.sh
+    chmod +x ./format_env_gce.sh
+
+    CDBG_ARGS="$( ./format_env_gce.sh --app_class_path=target --version=java )"
+  fi
+fi
+
+exec java ${CDBG_ARGS} -DPROD_MODE=true -jar target/carpet.jar
