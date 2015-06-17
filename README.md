@@ -1,3 +1,10 @@
+# TODO
+
++ Simplify pod file (duplicate labels)
++ Start debugger agent with correct sha1 and version?
+
+
+
 # Google Cloud Platform University
 
 Carpet Showdown is a very simple project that demonstrates the usage of Docker
