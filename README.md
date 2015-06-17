@@ -1,7 +1,3 @@
-# TODO
-
-- Kubernetes: show what's going on with firebase bridge
-
 # Google Cloud Platform University
 
 Carpet Showdown is a very simple project that demonstrates the usage of Docker
@@ -75,8 +71,10 @@ Take a look at the logs.
 ### Start more nodes
 
 ```bash
+kubectl proxy --www=cluster/static
+open http:://localhost:8001/static/
+
 kubectl scale --replicas=4 rc pod-carpet
-kubectl get pods
 ```
 
 ### Cleanup Kubernetes Cluster
