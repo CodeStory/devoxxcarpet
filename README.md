@@ -11,8 +11,9 @@ For instance, we'll use the App Engine's Cloud DataStore from all three.
 
 ## Run the web-app locally:
 
-We are going to work on a simple web-app. Because we'd like to write code and test our application faster, we're going
-to make sure it can be started out of the box like a standard java application.
+We are going to work on a simple web-app. Because we'd like to write code and
+test our application faster, we're going to make sure it can be started out of
+the box like a standard java application.
 
 ```bash
 mvn clean install
