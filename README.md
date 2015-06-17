@@ -2,6 +2,36 @@
 
 + Simplify pod file (duplicate labels)
 + Start debugger agent with correct sha1 and version?
++ Make start.sh faster without network (don't download debugger stuff)
++ Use faster machine for the docker-machine demo
+
++ Learn the exact command by heart
++ After each deploy show fun things
++ Really show traffic splitting
++ Sticky session on Kubernetes?
++ Sticky session on GAE
++ Big query outside of the console. eg. Excel
++ Show scaling
++ Why do we try each techno? Must be something Really
++ Why try another one?
++ Multiple containers
++ Smoother (bulletproof) debugger
++ Firebase native js/css or grunt?
++ Show cdn map
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,7 +85,6 @@ Instead of relying on a public Docker registry, one can have it's private
 registry hosted on Google Cloud Platform without any configuration.
 
 ```bash
-docker build -t dgageot/devoxxcarpet .
 docker tag -f dgageot/devoxxcarpet gcr.io/carpet-devoxx-uk/devoxxcarpet
 gcloud preview docker push gcr.io/carpet-devoxx-uk/devoxxcarpet
 ```
@@ -74,7 +103,7 @@ gcloud compute forwarding-rules list
 gcloud compute firewall-rules create --allow=tcp:80 --target-tags=k8s-carpet-node k8s-carpet-node-80
 ```
 
-Take a look at the logs.
+Take a look at the logs in the log console.
 
 ### Start more nodes
 
@@ -85,7 +114,7 @@ open http:://localhost:8001/static/
 kubectl scale --replicas=4 rc pod-carpet
 ```
 
-### Cleanup Kubernetes Cluster
+### Cleanup Cluster
 
 ```bash
 kubectl delete -f cluster/pod.yaml
@@ -97,7 +126,7 @@ kubectl delete -f cluster/service.yaml
 First we might want to run locally with AppEngine's dev server.
 
 ```bash
-gcloud preview app run app.yaml
+gcloud --verbosity debug preview app run app.yaml
 ```
 
 Then really deploy the application.
