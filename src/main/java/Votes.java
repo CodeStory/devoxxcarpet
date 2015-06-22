@@ -1,10 +1,4 @@
-package store;
-
 import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class Votes {
     public static final int CARPET_COUNT = 12;
@@ -13,33 +7,19 @@ public class Votes {
     private final int[] playedPerIndex;
     private final int[] scorePerIndex;
     private final int[] votesPerIndex;
-    private final VotesRepository votesRepository;
-    private final Executor executor;
 
     public Votes() {
-        this.votesRepository = new VotesRepository();
         this.playedPerIndex = new int[CARPET_COUNT];
         this.scorePerIndex = new int[CARPET_COUNT];
         this.votesPerIndex = new int[CARPET_COUNT];
-        this.executor = Executors.newSingleThreadExecutor();
 
         Arrays.fill(playedPerIndex, 0);
         Arrays.fill(scorePerIndex, START_SCORE);
         Arrays.fill(votesPerIndex, 0);
-
-        votesRepository.refresh(this::computeVote);
-
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                executor.execute(() -> votesRepository.refresh(Votes.this::computeVote));
-            }
-        }, 5000, 5000);
     }
 
     public void vote(int winner, int looser) {
         computeVote(winner, looser);
-        executor.execute(() -> votesRepository.vote(winner, looser));
     }
 
     public synchronized int score(int index) {

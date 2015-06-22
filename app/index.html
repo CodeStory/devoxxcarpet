@@ -9,7 +9,7 @@ ng-app: app
 <div id="title">Carpet Showdown</div>
 
 <div id="main" ng-controller="HomeController as home">
-    <div class="vote" id="vote1">
+    <div class="vote" id="left">
         <div class="image" ng-click="home.preferFirst()">
             <a href="#">
                 <img class="img-thumbnail" ng-src="/img/carpet{{home.left}}.jpg"/>
@@ -18,7 +18,7 @@ ng-app: app
         </div>
     </div>
 
-    <div class="vote" id="vote2">
+    <div class="vote" id="right">
         <div class="image" ng-click="home.preferSecond()">
             <a href="#">
                 <img class="img-thumbnail" ng-src="/img/carpet{{home.right}}.jpg"/>
@@ -31,7 +31,7 @@ ng-app: app
         <div class="rank rank{{carpet.rank}}" ng-repeat="carpet in home.top | orderBy:'index' track by $index">
             <img class="img-thumbnail" ng-src="/img/small{{$index}}.jpg"/>
 
-            <p class="rank">#{{carpet.rank + 1}}</p>
+            <p class="position">#{{carpet.rank + 1}}</p>
 
             <p class="votes" ng-pluralize count="carpet.votes"
                when="{'0': 'no vote', 'one': '{} vote', 'other': '{} votes'}"></p>

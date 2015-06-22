@@ -2,10 +2,9 @@
 
 Random match between two carpets.
 
-    .service 'Match', ->
+    .service 'Match', ($http) ->
       random: (count) ->
-        [left, right] = [Math.floor(Math.random() * count), Math.floor(Math.random() * count)] while (left is right)
-        [left, right]
+        $http.get "/match", cache: false
 
 Retrieve all the carpets or Vote for a carpet against another.
 
@@ -13,6 +12,7 @@ Retrieve all the carpets or Vote for a carpet against another.
       carpets: ->
         $http.get "/carpets", cache: false
       vote: (winner, looser) ->
+        console.log "#{winner} wins against #{looser}"
         $http.post "/votes/#{winner}/#{looser}"
 
 Main controller.
@@ -41,4 +41,5 @@ Get all the carpets with their votes, sort by number of votes to compute the ran
           carpet.rank = i for carpet,i in carpets
           @top = carpets
 
-          [@left, @right] = @Match.random(@top.length)
+          @Match.random(@top.length).success (data) =>
+            [@left, @right] = data
